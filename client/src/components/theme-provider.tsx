@@ -25,6 +25,7 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [isManuallySet, setIsManuallySet] = useState<boolean>(false);
 
   // Function to get time-based theme
   const getTimeBasedTheme = (): Theme => {
@@ -38,12 +39,19 @@ export function ThemeProvider({
     
     // Check for saved theme preference or use time-based theme
     const savedTheme = localStorage.getItem("theme") as Theme;
-    const initialTheme = savedTheme || getTimeBasedTheme();
+    const isManual = localStorage.getItem("theme-manual") === "true";
     
-    setTheme(initialTheme);
+    if (savedTheme) {
+      setTheme(savedTheme);
+      setIsManuallySet(isManual);
+    } else {
+      const timeBasedTheme = getTimeBasedTheme();
+      setTheme(timeBasedTheme);
+      setIsManuallySet(false);
+    }
     
     root.classList.remove("light", "dark");
-    root.classList.add(initialTheme);
+    root.classList.add(savedTheme || getTimeBasedTheme());
   }, []);
 
   useEffect(() => {
@@ -51,13 +59,14 @@ export function ThemeProvider({
     root.classList.remove("light", "dark");
     root.classList.add(theme);
     localStorage.setItem("theme", theme);
-  }, [theme]);
+    localStorage.setItem("theme-manual", isManuallySet.toString());
+  }, [theme, isManuallySet]);
 
   // Auto-update theme based on time if no manual preference is set
   useEffect(() => {
     const interval = setInterval(() => {
-      const savedTheme = localStorage.getItem("theme");
-      if (!savedTheme) {
+      const isManual = localStorage.getItem("theme-manual") === "true";
+      if (!isManual) {
         const timeBasedTheme = getTimeBasedTheme();
         if (timeBasedTheme !== theme) {
           setTheme(timeBasedTheme);
@@ -66,13 +75,15 @@ export function ThemeProvider({
     }, 60000); // Check every minute
 
     return () => clearInterval(interval);
-  }, [theme]);
+  }, [theme, getTimeBasedTheme]);
 
   const value = {
     theme,
     setTheme: (theme: Theme) => {
       localStorage.setItem("theme", theme);
+      localStorage.setItem("theme-manual", "true");
       setTheme(theme);
+      setIsManuallySet(true);
     },
   };
 
