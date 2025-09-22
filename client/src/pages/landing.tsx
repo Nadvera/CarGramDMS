@@ -776,19 +776,21 @@ export default function Landing() {
               </p>
               <div className="flex space-x-4">
                 {[
-                  { icon: Instagram, label: "Instagram" },
-                  { icon: Twitter, label: "Twitter" },
-                  { icon: Facebook, label: "Facebook" },
+                  { icon: Instagram, label: "Instagram", url: "https://instagram.com/cargram" },
+                  { icon: Twitter, label: "Twitter", url: "https://twitter.com/cargram" },
+                  { icon: Facebook, label: "Facebook", url: "https://facebook.com/cargram" },
                 ].map((social, index) => (
-                  <Button
+                  <a
                     key={index}
-                    variant="ghost"
-                    size="icon"
-                    className="w-10 h-10 bg-secondary hover:bg-accent rounded-full"
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-secondary hover:bg-accent rounded-full flex items-center justify-center transition-colors"
                     data-testid={`social-${social.label.toLowerCase()}`}
+                    aria-label={`Visit our ${social.label} page`}
                   >
                     <social.icon className="w-5 h-5" />
-                  </Button>
+                  </a>
                 ))}
               </div>
             </div>
