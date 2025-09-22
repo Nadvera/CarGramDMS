@@ -1,0 +1,704 @@
+/* Slick carousel styles */
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Code', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Code', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-bebas: 'Bebas Neue', sans-serif;
+}
+
+/* Light theme variables (default) */
+:root {
+  --background: #ffffff;
+  --foreground: #222222;
+  --primary: #0070f3;
+  --primary-hover: #0051cc;
+  --secondary: #f5f5f5;
+  --border: transparent;
+  --border-light: #efefef;
+  --input-bg: #f6f6f6;
+  --card-bg: #ffffff;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --success: #0cce6b;
+  --error: #ed4956;
+  --text-muted: #666666;
+  --text-secondary: #8e8e8e;
+  --badge-bg: #dbdbdb;
+  --badge-color: #262626;
+  --button-secondary-bg: #dbdbdb;
+  --button-secondary-color: #262626;
+  --header-bg: #ffffff;
+  --header-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --modal-bg: #ffffff;
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --dropdown-bg: #ffffff;
+  --dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --onPrimary: white; /* Explicit white color for text on primary buttons */
+  --surface: #fafafa;
+  --grey: #8e8e8e;
+
+  /* Primary colors */
+  --primary: #3b82f6;
+  --primaryHover: #2563eb;
+  --error: #ff3333;
+  --errorDark: #cc0000;
+
+  /* Follow button colors for light mode */
+  --follow-button-bg: rgba(0, 0, 0, 0.1);
+  --follow-button-color: var(--foreground);
+  --follow-button-border: rgba(0, 0, 0, 0.3);
+  --follow-button-hover-bg: rgba(0, 0, 0, 0.15);
+  --follow-button-hover-border: rgba(0, 0, 0, 0.5);
+  --follow-button-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --follow-button-following-bg: rgba(34, 197, 94, 0.15);
+  --follow-button-following-color: #16a34a;
+  --follow-button-following-border: rgba(34, 197, 94, 0.4);
+  --follow-button-text-shadow: none;
+}
+
+[data-theme='dark'] {
+  /* Dark theme variables - Centralized black/grey color scheme */
+  --background: #0a0a0a;           /* Deep black background */
+  --foreground: #e5e5e5;           /* Light grey text */
+  --primary: #666666;              /* Medium grey for primary elements */
+  --primary-hover: #777777;        /* Slightly lighter grey for hover */
+  --secondary: #1a1a1a;            /* Dark grey for secondary elements */
+  --border: #333333;               /* Dark border */
+  --border-light: #404040;         /* Lighter border */
+  --input-bg: #151515;             /* Dark input background */
+  --card-bg: #111111;              /* Card background */
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --success: #4a5568;              /* Grey success color */
+  --error: #e53e3e;                /* Keep red for errors */
+  --text-muted: #999999;           /* Muted grey text */
+  --text-secondary: #b0b0b0;       /* Secondary text */
+  --badge-bg: #2d2d2d;             /* Badge background */
+  --badge-color: #e5e5e5;          /* Badge text */
+  --button-secondary-bg: #2d2d2d;  /* Secondary button background */
+  --button-secondary-color: #e5e5e5; /* Secondary button text */
+  --header-bg: #0f0f0f;            /* Header background */
+  --header-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --modal-bg: #111111;             /* Modal background */
+  --modal-overlay: rgba(0, 0, 0, 0.8);
+  --dropdown-bg: #111111;          /* Dropdown background */
+  --dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --surface: #1a1a1a;              /* Surface color */
+  --grey: #999999;                 /* Standard grey */
+
+  /* Primary colors - using grey tones */
+  --primary: #666666;
+  --primaryHover: #777777;
+  --error: #e53e3e;
+  --errorDark: #c53030;
+
+  /* Follow button colors for dark mode */
+  --follow-button-bg: rgba(255, 255, 255, 0.1);
+  --follow-button-color: #e5e5e5;
+  --follow-button-border: rgba(255, 255, 255, 0.3);
+  --follow-button-hover-bg: rgba(255, 255, 255, 0.2);
+  --follow-button-hover-border: rgba(255, 255, 255, 0.5);
+  --follow-button-hover-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  --follow-button-following-bg: rgba(102, 102, 102, 0.3);
+  --follow-button-following-color: #e5e5e5;
+  --follow-button-following-border: rgba(102, 102, 102, 0.8);
+  --follow-button-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+  color: var(--foreground);
+  background-color: var(--background);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  touch-action: pan-y; /* Disable horizontal scrolling on touch devices */
+  box-sizing: border-box;
+}
+
+/* Ensure all elements respect box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Additional mobile-specific overflow prevention */
+@media (max-width: 768px) {
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Prevent any element from exceeding viewport width */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  /* Specific fix for images and videos */
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  padding-right: 15px; /* Prevent layout shift when scrollbar disappears */
+}
+
+/* Also prevent scrolling on html element */
+html.modal-open {
+  overflow: hidden;
+}
+
+/* Prevent zoom on input focus for iOS devices */
+input,
+textarea,
+select,
+button {
+  font-size: 16px !important; /* Minimum font size to prevent zoom on iOS */
+  max-width: 100%;
+  box-sizing: border-box;
+  touch-action: manipulation; /* Disable double-tap zoom */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+}
+
+/* Fix iOS input padding issues */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+}
+
+/* Additional fix for select dropdowns on mobile */
+@media (max-width: 480px) {
+  select {
+    text-overflow: ellipsis;
+  }
+
+  /* Fix for any form elements that might cause zoom */
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"] {
+    font-size: 16px !important;
+  }
+
+  /* Fix for iOS/Safari which can ignore the font-size on focused elements */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    font-size: 16px !important;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--foreground);
+}
+
+button {
+  font-family: inherit;
+  border-radius: 50px !important; /* Ensure all buttons are fully rounded */
+}
+
+/* Global button styles for colored backgrounds */
+button[type="submit"],
+button.btn-primary,
+button.primary-button,
+button.signInButton,
+.signInButton,
+.primary-button {
+  color: white !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+input, textarea, select {
+  font-family: inherit;
+  color: var(--foreground);
+  background-color: var(--background);
+  border: 2px solid var(--border);
+  padding: 12px 20px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+input:hover, textarea:hover, select:hover {
+  border-color: var(--primary);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: inset 0 0 5px rgb(0, 85, 255, 0.1), 0 0 0 2px var(--primary-hover);
+}
+
+/* Bottom Navigation Body Padding */
+body {
+  padding-bottom: 70px;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* App content wrapper for sidebar adjustment */
+.app-content-wrapper {
+  transition: margin-left 0.3s ease;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .app-content-wrapper {
+    margin-left: 72px; /* Adjust for collapsed sidebar */
+    margin-right: 72px; /* Add equal right margin for balance */
+    max-width: calc(100vw - 144px); /* Account for both margins */
+    padding: 0 2rem;
+    /* Center content within the available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* CarFollowButton CSS Variables */
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-bg: rgba(59, 130, 246, 0.1);
+  --background: #ffffff;
+  --foreground: #000000;
+  --text-secondary: #6b7280;
+  --border: #e5e7eb;
+  --hover-bg: #f9fafb;
+}
+
+[data-theme="dark"] {
+  --background: #1f2937;
+  --foreground: #ffffff;
+  --text-secondary: #9ca3af;
+  --border: #374151;
+  --hover-bg: #374151;
+}
+
+[data-theme='dark'] input,
+[data-theme='dark'] textarea,
+[data-theme='dark'] select {
+  background-color: #444;
+  color: #ccc;
+}
+
+/* Utility classes for theme-aware styling */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+}
+
+.primary-button {
+  background-color: var(--primary);
+  color: white !important; /* Ensure text is always white */
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 50px; /* Made rounded like cancel buttons */
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.primary-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg,
+    rgba(54, 148, 255, 0.2),
+    rgba(102, 68, 255, 0.8),
+    rgba(54, 148, 255, 0.6),
+    rgba(54, 148, 255, 0.2));
+  background-size: 200% 200%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  border-radius: 50px;
+}
+
+.primary-button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.primary-button:hover::before {
+  opacity: 1;
+  animation: shinyCloud 1.5s ease-in-out infinite;
+}
+
+.primary-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Star animation for primary button clicks */
+.primary-button:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(circle, transparent 20%, rgba(255, 255, 255, 0.3) 21%, rgba(255, 255, 255, 0.3) 22%, transparent 23%);
+  background-size: 20px 20px;
+  transform: translate(-50%, -50%) scale(0);
+  animation: starBurst 0.6s ease-out;
+}
+
+@keyframes starBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.primary-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+.primary-button:disabled:hover {
+  background-color: #ccc;
+  transform: none;
+  box-shadow: none;
+}
+
+.primary-button:disabled::before {
+  display: none;
+}
+
+@keyframes shinyCloud {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.secondary-button {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-color);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 50px; /* Consistent rounded styling */
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 100px;
+}
+
+.secondary-button:hover {
+  background-color: var(--surface);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-button {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.secondary-button:hover {
+  filter: brightness(0.9);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+/* Global custom video styling - hide all controls */
+.custom-video {
+  cursor: pointer;
+}
+
+.custom-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-current-time-display {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-time-remaining-display {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-timeline {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-volume-slider {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-mute-button {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-fullscreen-button {
+  display: none !important;
+}
+
+.custom-video::-moz-media-controls {
+  display: none !important;
+}
+
+.custom-video::-ms-media-controls {
+  display: none !important;
+}
+
+/* For Firefox */
+.custom-video::-moz-media-controls-panel {
+  display: none !important;
+}
+
+/* Additional vendor prefixes for complete control hiding */
+.custom-video::--webkit-media-controls {
+  display: none !important;
+}
+
+.custom-video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+/* Added styles to address user's issues */
+header {
+  width: 100%; /* Make header full width */
+}
+
+/* Style for header buttons to be hidden */
+.header-button {
+  display: none;
+}
+
+/* Styles for the fixed bottom footer */
+.footer-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  background-color: var(--header-bg); /* Use header background for consistency */
+  box-shadow: var(--header-shadow);
+  z-index: 1000;
+}
+
+/* Styles for footer icons */
+.footer-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-secondary); /* Default icon color */
+  text-decoration: none;
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a.active {
+  color: var(--primary); /* Active icon color */
+}
+
+/* Badge/counter styling for transparent backgrounds */
+.footer-nav .badge {
+  background: transparent !important;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.footer-nav a.active .badge {
+  color: var(--primary);
+}
+
+/* Dark theme adjustments for badges */
+[data-theme='dark'] .footer-nav .badge {
+  color: var(--text-secondary);
+}
+
+[data-theme='dark'] .footer-nav a.active .badge {
+  color: var(--primary);
+}
+
+/* Specific icon styles (example, will need actual icons) */
+.footer-nav .icon-home { /* Example: Home icon */ }
+.footer-nav .icon-search { /* Example: Search icon */ }
+.footer-nav .icon-add { /* Example: Add post button */
+  font-size: 2rem; /* Larger size for the center button */
+  color: var(--foreground); /* Ensure visibility */
+  background-color: var(--primary); /* Highlight the center button */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -10px; /* Adjust to float above the footer slightly */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the middle button has its own unique styling */
+.footer-nav a.center-button {
+  margin-top: -15px; /* Adjust to float above the footer slightly */
+  background-color: var(--primary);
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.footer-nav .icon-likes { /* Example: Likes icon */ }
+.footer-nav .icon-profile { /* Example: Profile icon */ }
+
+
+.content-type-bubble, .date-bubble {
+  background-color: var(--badge-bg); /* Add background to bubbles */
+  color: var(--badge-color); /* Add text color to bubbles */
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+/*  Adjust post spacing */
+.post {
+  max-width: 80%; /* Limit post width to 80% of container */
+  margin: 0 auto 1rem; /* Center posts and reduce bottom margin */
+}
+
+/* Add select styling - requires more context from original code to restore properly */
+select {
+  padding: 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--foreground);
+  background-color: var(--background);
+  position: relative;
+  z-index: 1001;
+}
+
+select option {
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+/* Apply Bebas Neue font to car nicknames - more specific selectors only */
+.carInfo .car-nickname,
+.carNicknameContainer .car-nickname,
+.postHeader .car-nickname {
+  font-family: var(--font-bebas) !important;
+  color: #000000 !important; /* Pure black for light mode */
+  text-shadow: none !important; /* No shadow in light mode */
+  background: transparent !important; /* Ensure no background */
+}
+
+/* Dark mode car nickname styling - more specific selectors only */
+[data-theme='dark'] .carInfo .car-nickname,
+[data-theme='dark'] .carNicknameContainer .car-nickname,
+[data-theme='dark'] .postHeader .car-nickname {
+  color: #ffffff !important; /* Pure white for dark mode */
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5) !important; /* Sharp shadow */
+  background: transparent !important; /* Ensure no background */
+}
