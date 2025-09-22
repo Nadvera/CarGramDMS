@@ -5,6 +5,16 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { insertEmailSubscriptionSchema, type InsertEmailSubscription } from "@shared/schema";
 import {
   Car,
   Sun,
@@ -36,37 +46,57 @@ import {
 export default function Landing() {
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
-  const [email, setEmail] = useState("");
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
+  
+  // Email subscription form
+  const form = useForm<InsertEmailSubscription>({
+    resolver: zodResolver(insertEmailSubscriptionSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
   // Email subscription mutation
   const subscriptionMutation = useMutation({
-    mutationFn: async (email: string) => {
-      const response = await apiRequest("POST", "/api/subscribe", { email });
+    mutationFn: async (data: InsertEmailSubscription) => {
+      const response = await apiRequest("POST", "/api/subscribe", data);
       return response.json();
     },
     onSuccess: (data) => {
       toast({
         title: "Success!",
-        description: data.message,
+        description: "Thank you for subscribing to our newsletter!",
       });
-      setEmail("");
+      form.reset(); // Clear the form
     },
     onError: (error: any) => {
+      const errorMessage = error.message || "Failed to subscribe. Please try again.";
+      
+      // Parse status code from error message (format: "409: error text")
+      const statusMatch = errorMessage.match(/^(\d+):/);
+      const statusCode = statusMatch ? parseInt(statusMatch[1], 10) : null;
+      const isDuplicate = statusCode === 409;
+      
+      // Show toast notification
       toast({
-        title: "Subscription Failed",
-        description: error.message || "Please try again later.",
         variant: "destructive",
+        title: "Error",
+        description: isDuplicate ? "You're already subscribed to our newsletter!" : errorMessage,
       });
+      
+      // Set form-level error for better accessibility
+      if (isDuplicate) {
+        form.setError("email", {
+          type: "manual",
+          message: "This email is already subscribed",
+        });
+      }
     },
   });
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      subscriptionMutation.mutate(email);
-    }
+  const onSubmit = (data: InsertEmailSubscription) => {
+    subscriptionMutation.mutate(data);
   };
 
   const scrollToForm = () => {
@@ -354,33 +384,44 @@ export default function Landing() {
               </div>
 
               {/* Email Form */}
-              <form onSubmit={handleEmailSubmit} className="space-y-4" data-testid="email-form">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="form-input flex-1"
-                    required
-                    data-testid="email-input"
-                  />
-                  <Button
-                    type="submit"
-                    variant="automotive"
-                    size="lg"
-                    className="capsule-btn"
-                    disabled={subscriptionMutation.isPending}
-                    data-testid="subscribe-button"
-                  >
-                    <Send className="w-5 h-5" />
-                    {subscriptionMutation.isPending ? "Subscribing..." : "Subscribe"}
-                  </Button>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  No spam, unsubscribe at any time. We respect your privacy.
-                </p>
-              </form>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="email-form">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="flex-1">
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="Enter your email address"
+                              className="form-input"
+                              data-testid="input-email"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button
+                      type="submit"
+                      variant="automotive"
+                      size="lg"
+                      className="capsule-btn"
+                      disabled={subscriptionMutation.isPending || !form.formState.isValid}
+                      data-testid="button-subscribe"
+                    >
+                      <Send className="w-5 h-5" />
+                      {subscriptionMutation.isPending ? "Subscribing..." : "Subscribe"}
+                    </Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    No spam, unsubscribe at any time. We respect your privacy.
+                  </p>
+                </form>
+              </Form>
             </div>
           </div>
         </div>
