@@ -12,7 +12,7 @@ export class ErrorLogger {
     };
 
     // Always log to console in development
-    if (import.meta.env.MODE === 'development') {
+    if (import.meta.env.DEV) {
       console.group(`🚨 Error ${context ? `(${context})` : ''}`);
       console.error('Error:', error);
       console.table(errorInfo);
@@ -20,7 +20,7 @@ export class ErrorLogger {
     }
 
     // In production, you might want to send to a logging service
-    if (import.meta.env.MODE === 'production') {
+    if (import.meta.env.PROD) {
       // Send to your logging service
       this.sendToLoggingService(errorInfo);
     }

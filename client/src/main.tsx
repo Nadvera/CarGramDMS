@@ -17,7 +17,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
   beforeSend(event) {
     // Only send errors in production, log them in development
-    if (import.meta.env.MODE === 'development') {
+    if (import.meta.env.DEV) {
       console.error('Sentry Event:', event);
       return null; // Don't send to Sentry in dev
     }

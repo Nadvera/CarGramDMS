@@ -1,4 +1,5 @@
 
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -33,30 +34,30 @@
 }
 
 .dark {
-  --background: hsl(222 47% 11%);
+  --background: hsl(222.2 84% 4.9%);
   --foreground: hsl(210 40% 98%);
-  --card: hsl(222 47% 11%);
+  --card: hsl(222.2 84% 4.9%);
   --card-foreground: hsl(210 40% 98%);
-  --popover: hsl(222 47% 11%);
+  --popover: hsl(222.2 84% 4.9%);
   --popover-foreground: hsl(210 40% 98%);
   --primary: hsl(214 100% 59%);
   --primary-foreground: hsl(210 40% 98%);
-  --secondary: hsl(222 47% 15%);
+  --secondary: hsl(217.2 32.6% 17.5%);
   --secondary-foreground: hsl(210 40% 98%);
-  --muted: hsl(222 47% 15%);
+  --muted: hsl(217.2 32.6% 17.5%);
   --muted-foreground: hsl(215 20.2% 65.1%);
-  --accent: hsl(222 47% 15%);
+  --accent: hsl(217.2 32.6% 17.5%);
   --accent-foreground: hsl(210 40% 98%);
-  --destructive: hsl(0 63% 31%);
+  --destructive: hsl(0 62.8% 30.6%);
   --destructive-foreground: hsl(210 40% 98%);
-  --border: hsl(216 34% 20%);
-  --input: hsl(216 34% 17%);
-  --ring: hsl(216 34% 17%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(212.7 26.8% 83.9%);
 
   /* Custom automotive colors for dark mode */
   --automotive-blue: hsl(214 100% 59%);
   --automotive-orange: hsl(24 100% 50%);
-  --automotive-dark: hsl(222 47% 8%);
+  --automotive-dark: hsl(222.2 84% 4.9%);
   --automotive-gray: hsl(220 13% 25%);
 }
 
@@ -97,7 +98,7 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-/* Clean white/black cards with soft shadows */
+/* Clean cards with soft shadows */
 .glassmorphism {
   background: hsl(var(--card));
   backdrop-filter: blur(10px);
@@ -113,7 +114,7 @@
   color: hsl(var(--card-foreground));
 }
 
-/* Header glassmorphism - better transparency and backdrop */
+/* Header glassmorphism */
 .header-glassmorphism {
   background: hsl(var(--background) / 0.85);
   backdrop-filter: blur(20px);
@@ -136,17 +137,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* Fallback for browsers that don't support background-clip */
-  color: #3b82f6;
-}
-
-/* Ensure gradient works in dark mode too */
-.dark .gradient-text {
-  background: linear-gradient(135deg, #3b82f6, #f97316);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: #3b82f6;
+  color: #3b82f6; /* Fallback */
 }
 
 /* Hero gradient background */
@@ -194,13 +185,6 @@
   min-height: 44px;
 }
 
-.dark .form-input {
-  background: hsl(var(--background));
-  color: hsl(var(--foreground));
-  border-color: hsl(var(--border));
-}
-
-/* Mobile-specific touch target improvements */
 @media (max-width: 768px) {
   .form-input {
     min-height: 48px;
@@ -218,7 +202,7 @@
   color: hsl(var(--muted-foreground));
 }
 
-/* Clean white/black cards with soft shadows */
+/* Clean cards with soft shadows */
 .card-soft-shadow {
   background: hsl(var(--card));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
