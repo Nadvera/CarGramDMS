@@ -17,7 +17,6 @@ import {
 import { insertEmailSubscriptionSchema, type InsertEmailSubscription } from "@shared/schema";
 import DealerSignupForm from "@/components/dealer-signup-form";
 import {
-  Car,
   Zap,
   Users,
   Smartphone,
@@ -216,13 +215,13 @@ export default function Landing() {
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-32 h-16 opacity-20">
-            <Car className="w-full h-full" />
+            <Building className="w-full h-full" />
           </div>
           <div className="absolute top-40 right-20 w-24 h-12 opacity-15">
-            <Car className="w-full h-full" />
+            <Smartphone className="w-full h-full" />
           </div>
           <div className="absolute bottom-32 left-1/4 w-28 h-14 opacity-25">
-            <Car className="w-full h-full" />
+            <TrendingUp className="w-full h-full" />
           </div>
         </div>
 
@@ -693,7 +692,7 @@ export default function Landing() {
               <div className={`glassmorphism rounded-3xl p-8 w-full max-w-md space-y-6 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
                 <div className="text-center space-y-4">
                   <div className="w-20 h-20 bg-gradient-to-br from-primary to-orange-500 rounded-2xl flex items-center justify-center mx-auto">
-                    <Car className="w-10 h-10 text-white" />
+                    <Building className="w-10 h-10 text-white" />
                   </div>
                   <div>
                     <img
@@ -739,7 +738,7 @@ export default function Landing() {
             <div className="space-y-4" data-testid="footer-brand">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-primary to-orange-500 rounded-2xl flex items-center justify-center">
-                  <Car className="w-6 h-6 text-white" />
+                  <Building className="w-6 h-6 text-white" />
                 </div>
                 <span className={`font-instagram text-2xl font-bold gradient-text ${theme === 'dark' ? 'text-white' : ''}`}>
                   Cargram™
