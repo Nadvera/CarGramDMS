@@ -9,15 +9,15 @@ ErrorLogger.setupGlobalHandlers();
 
 // Initialize Sentry for error tracking
 Sentry.init({
-  dsn: process.env.VITE_SENTRY_DSN || "", // You'll need to set this in your environment
-  environment: process.env.NODE_ENV || "development",
+  dsn: import.meta.env.VITE_SENTRY_DSN || "", // You'll need to set this in your environment
+  environment: import.meta.env.MODE || "development",
   integrations: [
     Sentry.browserTracingIntegration(),
   ],
   tracesSampleRate: 1.0,
   beforeSend(event) {
     // Only send errors in production, log them in development
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.MODE === 'development') {
       console.error('Sentry Event:', event);
       return null; // Don't send to Sentry in dev
     }

@@ -38,6 +38,7 @@ import {
   Send,
   MapPin,
   Mail,
+  Headphones,
 } from "lucide-react";
 
 export default function Landing() {
