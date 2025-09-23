@@ -224,3 +224,138 @@
 .hover-scale:hover {
   transform: scale(1.05);
 }
+
+/* 3D Metallic Phone Frame */
+.phone-frame-3d {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.phone-container-3d {
+  width: 320px;
+  height: 640px;
+  position: relative;
+  cursor: pointer;
+  transform: rotateX(8deg) rotateY(-12deg);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.phone-container-3d:hover {
+  transform: rotateX(12deg) rotateY(-18deg) translateY(-15px);
+}
+
+.phone-container-3d:active {
+  transform: rotateX(15deg) rotateY(-20deg) translateY(-8px) scale(0.98);
+  transition: all 0.2s ease;
+}
+
+/* Phone body with metallic gradient */
+.phone-container-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    #e8e8e8 0%, 
+    #c0c0c0 25%, 
+    #a8a8a8 50%, 
+    #d0d0d0 75%, 
+    #f0f0f0 100%);
+  border-radius: 25px;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Dark mode metallic gradient */
+.dark .phone-container-3d::before {
+  background: linear-gradient(135deg, 
+    #4a4a4a 0%, 
+    #2a2a2a 25%, 
+    #1a1a1a 50%, 
+    #3a3a3a 75%, 
+    #5a5a5a 100%);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Metallic side edges */
+.phone-container-3d::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    #b8b8b8 0%, 
+    #888888 50%, 
+    #b8b8b8 100%);
+  border-radius: 3px 0 0 3px;
+  transform: skewY(-10deg);
+  z-index: 0;
+}
+
+.dark .phone-container-3d::after {
+  background: linear-gradient(to bottom, 
+    #3a3a3a 0%, 
+    #1a1a1a 50%, 
+    #3a3a3a 100%);
+}
+
+.phone-screen-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 20px;
+  margin: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: 
+    inset 0 0 0 2px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Front bezel with darker thin edges */
+.phone-screen-3d::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, 
+    #333333 0%, 
+    #1a1a1a 50%, 
+    #333333 100%);
+  border-radius: 22px;
+  z-index: -1;
+}
+
+.phone-screen-3d iframe {
+  border: none;
+  background: white;
+}
+
+/* Speaker and home button details */
+.phone-container-3d .phone-screen-3d::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  z-index: 10;
+}

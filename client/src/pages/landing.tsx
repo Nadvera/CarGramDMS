@@ -529,7 +529,7 @@ export default function Landing() {
               </p>
               <Button
                 asChild
-                variant="outline"
+                variant="orange"
                 className="capsule-btn"
                 data-testid="join-beta-button"
               >
@@ -538,6 +538,38 @@ export default function Landing() {
                   Join Beta Community
                 </a>
               </Button>
+              
+              {/* Phone iframe with 3D metallic effect */}
+              <div className="flex justify-center mt-12">
+                <div className="phone-frame-3d">
+                  <a href="https://cargram.app" target="_blank" rel="noopener noreferrer" className="block">
+                    <div className="phone-container-3d">
+                      <div className="phone-screen-3d">
+                        <iframe
+                          src="https://cargram.app"
+                          className="w-full h-full rounded-[18px]"
+                          onLoad={() => setIframeLoaded(true)}
+                          onError={() => setIframeError(true)}
+                          title="Cargram App Preview"
+                        />
+                        {!iframeLoaded && !iframeError && (
+                          <div className="absolute inset-0 bg-gray-200 rounded-[18px] flex items-center justify-center">
+                            <div className="text-gray-500">Loading Cargram...</div>
+                          </div>
+                        )}
+                        {iframeError && (
+                          <div className="absolute inset-0 bg-gray-100 rounded-[18px] flex items-center justify-center">
+                            <div className="text-center text-gray-600">
+                              <div className="mb-2">Preview unavailable</div>
+                              <div className="text-sm">Click to visit Cargram</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
