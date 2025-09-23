@@ -48,7 +48,7 @@ export default function Landing() {
   const { toast } = useToast();
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
-  
+
   // Email subscription form
   const form = useForm<InsertEmailSubscription>({
     resolver: zodResolver(insertEmailSubscriptionSchema),
@@ -72,19 +72,19 @@ export default function Landing() {
     },
     onError: (error: any) => {
       const errorMessage = error.message || "Failed to subscribe. Please try again.";
-      
+
       // Parse status code from error message (format: "409: error text")
       const statusMatch = errorMessage.match(/^(\d+):/);
       const statusCode = statusMatch ? parseInt(statusMatch[1], 10) : null;
       const isDuplicate = statusCode === 409;
-      
+
       // Show toast notification
       toast({
         variant: "destructive",
         title: "Error",
         description: isDuplicate ? "You're already subscribed to our newsletter!" : errorMessage,
       });
-      
+
       // Set form-level error for better accessibility
       if (isDuplicate) {
         form.setError("email", {
@@ -297,7 +297,7 @@ export default function Landing() {
                   <div className="w-full h-full bg-black rounded-[2.5rem] overflow-hidden relative">
                     {/* Phone notch/status bar */}
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-2xl z-10"></div>
-                    
+
                     {/* Loading state */}
                     {!iframeLoaded && !iframeError && (
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700 flex flex-col items-center justify-center text-white z-20">
@@ -308,7 +308,7 @@ export default function Landing() {
                         <p className="text-blue-100 text-sm">Loading live preview...</p>
                       </div>
                     )}
-                    
+
                     {/* Error fallback */}
                     {iframeError && (
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700 flex flex-col items-center justify-center text-white z-20">
@@ -326,7 +326,7 @@ export default function Landing() {
                         </div>
                       </div>
                     )}
-                    
+
                     {/* Iframe */}
                     <iframe
                       src="https://cargram.app"
@@ -585,10 +585,12 @@ export default function Landing() {
                 <h2 className="font-queen text-4xl lg:text-5xl font-bold">
                   Enterprise Solutions
                 </h2>
-                <p className="text-xl text-muted-foreground">
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                   Beyond our community platform, we provide comprehensive dealer
                   management software and automotive business solutions across
-                  Orange County and beyond.
+                  Orange County and beyond. We collect and use your data solely
+                  to enhance your automotive community experience, connect you
+                  with relevant content, and improve our services.
                 </p>
               </div>
 
@@ -806,8 +808,8 @@ export default function Landing() {
                 links: ["About Us", "Careers", "Contact", "Press"],
               },
               {
-                title: "Support",
-                links: ["Help Center", "Privacy Policy", "Terms of Service", "Status"],
+                title: "Legal",
+                links: ["Privacy Policy", "Terms of Service", "Status"],
               },
             ].map((section, index) => (
               <div key={index} className="space-y-4" data-testid={`footer-section-${index}`}>
