@@ -61,7 +61,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertDealerSignupSchema.parse(req.body);
       
       // Create dealer signup
-      const signup = await storage.createDealerSignup(validatedData);
+      let signup;
+      try {
+        signup = await storage.createDealerSignup(validatedData);
+      } catch (dbError) {
+        console.error("Database error during dealer signup:", dbError);
+        return res.status(500).json({ 
+          message: "Database connection error. Please try again later.",
+          success: false
+        });
+      }
       
       // Send notification email to help@cargram.io
       const notificationSent = await sendDealerSignupNotification(validatedData);
