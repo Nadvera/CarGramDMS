@@ -1,6 +1,7 @@
 export class ErrorLogger {
   static log(error: Error, context?: string) {
     const timestamp = new Date().toISOString();
+
     const errorInfo = {
       timestamp,
       message: error.message,
@@ -11,7 +12,7 @@ export class ErrorLogger {
     };
 
     // Always log to console in development
-    if (import.meta.env.DEV) {
+    if (import.meta.env.MODE === 'development') {
       console.group(`🚨 Error ${context ? `(${context})` : ''}`);
       console.error('Error:', error);
       console.table(errorInfo);
@@ -19,10 +20,12 @@ export class ErrorLogger {
     }
 
     // In production, you might want to send to a logging service
-    if (import.meta.env.PROD) {
+    if (import.meta.env.MODE === 'production') {
       // Send to your logging service
       this.sendToLoggingService(errorInfo);
     }
+
+    return errorInfo;
   }
 
   private static sendToLoggingService(errorInfo: any) {
