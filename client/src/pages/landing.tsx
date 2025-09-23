@@ -137,9 +137,9 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-background text-foreground'}`}>
       {/* Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 header-glassmorphism">
+      <header className={`fixed top-0 left-0 right-0 z-50 ${theme === 'dark' ? 'bg-gray-800/90 shadow-lg' : 'header-glassmorphism'}`}>
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -155,21 +155,21 @@ export default function Landing() {
             <nav className="hidden md:flex items-center space-x-8">
               <a
                 href="#features"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
                 data-testid="nav-features"
               >
                 Features
               </a>
               <a
                 href="#community"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
                 data-testid="nav-community"
               >
                 Community
               </a>
               <a
                 href="#support"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
                 data-testid="nav-support"
               >
                 Support
@@ -183,13 +183,13 @@ export default function Landing() {
                 variant="outline"
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="capsule-btn"
+                className={`capsule-btn ${theme === 'dark' ? 'border-gray-600 hover:bg-gray-700' : 'border-border hover:bg-accent'}`}
                 data-testid="theme-toggle"
               >
                 {theme === "light" ? (
-                  <Moon className="w-5 h-5" />
+                  <Moon className={`w-5 h-5 ${theme === 'dark' ? 'text-white' : ''}`} />
                 ) : (
-                  <Sun className="w-5 h-5" />
+                  <Sun className={`w-5 h-5 ${theme === 'dark' ? 'text-white' : ''}`} />
                 )}
               </Button>
 
@@ -211,7 +211,7 @@ export default function Landing() {
       </header>
 
       {/* Hero Section */}
-      <section className="hero-gradient text-white pt-24 pb-16 min-h-screen flex items-center relative overflow-hidden">
+      <section className={`hero-gradient text-white pt-24 pb-16 min-h-screen flex items-center relative overflow-hidden ${theme === 'dark' ? 'bg-gray-900' : ''}`}>
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-32 h-16 opacity-20">
@@ -230,13 +230,13 @@ export default function Landing() {
             {/* Hero Content */}
             <div className="space-y-8 fade-in-up" data-testid="hero-content">
               <div className="space-y-4">
-                <h1 className="font-queen text-5xl lg:text-7xl font-bold leading-tight text-white">
+                <h1 className={`font-queen text-5xl lg:text-7xl font-bold leading-tight ${theme === 'dark' ? 'text-white' : 'text-white'}`}>
                   Where Business Meets
                   <span className="font-instagram block text-transparent bg-gradient-to-r from-blue-200 to-orange-200 bg-clip-text">
                     Car Culture
                   </span>
                 </h1>
-                <p className="text-xl lg:text-2xl text-blue-50 max-w-lg font-medium">
+                <p className={`text-xl lg:text-2xl ${theme === 'dark' ? 'text-gray-200' : 'text-blue-50'} max-w-lg font-medium`}>
                   Professional DMS that moves metal + Social platform where car culture lives. Two sides of the automotive world, one vision.
                 </p>
               </div>
@@ -245,15 +245,15 @@ export default function Landing() {
               <div className="flex flex-wrap gap-8 text-sm" data-testid="hero-stats">
                 <div className="flex items-center space-x-2">
                   <Building className="w-5 h-5 text-orange-400" />
-                  <span>Hundreds of Dealers</span>
+                  <span className={theme === 'dark' ? 'text-gray-300' : ''}>Hundreds of Dealers</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-5 h-5 text-orange-400" />
-                  <span>12+ Years Experience</span>
+                  <span className={theme === 'dark' ? 'text-gray-300' : ''}>12+ Years Experience</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPin className="w-5 h-5 text-orange-400" />
-                  <span>Nationwide Coverage</span>
+                  <span className={theme === 'dark' ? 'text-gray-300' : ''}>Nationwide Coverage</span>
                 </div>
               </div>
 
@@ -272,7 +272,7 @@ export default function Landing() {
                   onClick={scrollToForm}
                   variant="outline"
                   size="xl"
-                  className="capsule-btn bg-white/10 hover:bg-white/20 text-white border-white/20"
+                  className={`capsule-btn ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600 border-gray-600 text-white' : 'bg-white/10 hover:bg-white/20 text-white border-white/20'}`}
                   data-testid="get-updates-button"
                 >
                   <Mail className="w-5 h-5" />
@@ -285,7 +285,7 @@ export default function Landing() {
             <div className="flex justify-center lg:justify-end" data-testid="hero-visual">
               <div className="relative">
                 {/* Modern desktop mockup with DMS screenshot */}
-                <div className="bg-gray-900 rounded-2xl p-4 shadow-2xl float-animation">
+                <div className={`bg-gray-900 rounded-2xl p-4 shadow-2xl float-animation ${theme === 'dark' ? 'dark' : ''}`}>
                   <div className="bg-gray-800 rounded-t-xl px-4 py-2 flex items-center space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                     <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -317,15 +317,15 @@ export default function Landing() {
       </section>
 
       {/* Lead Capture Form Section */}
-      <section id="lead-form" className="py-16 bg-secondary/50" data-testid="lead-capture-section">
+      <section id="lead-form" className={`py-16 ${theme === 'dark' ? 'bg-gray-800' : 'bg-secondary/50'}`} data-testid="lead-capture-section">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="glassmorphism rounded-3xl p-8 space-y-6">
+            <div className={`glassmorphism rounded-3xl p-8 space-y-6 ${theme === 'dark' ? 'bg-gray-900 shadow-xl' : ''}`}>
               <div className="space-y-4">
-                <h2 className="font-queen text-3xl lg:text-4xl font-bold">
+                <h2 className={`font-queen text-3xl lg:text-4xl font-bold ${theme === 'dark' ? 'text-white' : ''}`}>
                   Stay in the Fast Lane
                 </h2>
-                <p className="text-muted-foreground text-lg">
+                <p className={`text-muted-foreground text-lg ${theme === 'dark' ? 'text-gray-300' : ''}`}>
                   Be the first to know about new features, community events, and
                   automotive trends. Join our exclusive newsletter.
                 </p>
@@ -344,12 +344,12 @@ export default function Landing() {
                             <Input
                               type="email"
                               placeholder="Enter your email address"
-                              className="form-input"
+                              className={`form-input ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:ring-blue-500' : ''}`}
                               data-testid="input-email"
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className={theme === 'dark' ? 'text-red-400' : ''} />
                         </FormItem>
                       )}
                     />
@@ -361,11 +361,11 @@ export default function Landing() {
                       disabled={subscriptionMutation.isPending || !form.formState.isValid}
                       data-testid="button-subscribe"
                     >
-                      <Send className="w-5 h-5" />
+                      <Send className={`w-5 h-5 ${theme === 'dark' ? 'text-white' : ''}`} />
                       {subscriptionMutation.isPending ? "Subscribing..." : "Subscribe"}
                     </Button>
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
                     No spam, unsubscribe at any time. We respect your privacy.
                   </p>
                 </form>
@@ -376,13 +376,13 @@ export default function Landing() {
       </section>
 
       {/* Features Section - DMS Focus */}
-      <section id="features" className="py-16" data-testid="features-section">
+      <section id="features" className={`py-16 ${theme === 'dark' ? 'bg-gray-900' : ''}`} data-testid="features-section">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="font-queen text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className={`font-queen text-4xl lg:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>
               Cargram DMS - Built Different
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'} max-w-3xl mx-auto`}>
               The mobile-first DMS that closes deals on the lot, not just in the office.
               Years of automotive software expertise, serving dealers nationwide.
             </p>
@@ -436,7 +436,7 @@ export default function Landing() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="glassmorphism rounded-2xl p-8 space-y-6 hover-scale transition-transform duration-200"
+                className={`glassmorphism rounded-2xl p-8 space-y-6 hover-scale transition-transform duration-200 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}
                 data-testid={`feature-card-${index}`}
               >
                 <div
@@ -445,8 +445,8 @@ export default function Landing() {
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
                 <div className="space-y-3">
-                  <h3 className="font-semibold text-xl">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <h3 className={`font-semibold text-xl ${theme === 'dark' ? 'text-white' : ''}`}>{feature.title}</h3>
+                  <p className={theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}>{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -457,22 +457,22 @@ export default function Landing() {
       {/* Community Section - Cargram Social Coming Soon */}
       <section
         id="community"
-        className="py-16 bg-gradient-to-br from-primary/5 to-orange-500/5"
+        className={`py-16 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-br from-primary/5 to-orange-500/5'}`}
         data-testid="community-section"
       >
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center space-y-12">
             <div className="space-y-6">
-              <h2 className="font-queen text-4xl lg:text-5xl font-bold">
+              <h2 className={`font-queen text-4xl lg:text-5xl font-bold ${theme === 'dark' ? 'text-white' : ''}`}>
                 Coming Soon: Cargram Social
               </h2>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'} leading-relaxed`}>
                 The DMS guy who actually gets car culture is building social too.
                 Where proven business software meets automotive passion - connecting both sides of the car world.
               </p>
-              <div className="inline-flex items-center space-x-2 bg-orange-500/10 rounded-full px-4 py-2">
+              <div className={`inline-flex items-center space-x-2 rounded-full px-4 py-2 ${theme === 'dark' ? 'bg-orange-500/20' : 'bg-orange-500/10'}`}>
                 <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                <span className="text-sm text-orange-600 font-medium">Small beta community, big vision ahead</span>
+                <span className={theme === 'dark' ? 'text-orange-400 text-sm font-medium' : 'text-orange-600 text-sm font-medium'}>Small beta community, big vision ahead</span>
               </div>
             </div>
 
@@ -509,21 +509,21 @@ export default function Landing() {
               ].map((feature, index) => (
                 <div
                   key={index}
-                  className="glassmorphism rounded-2xl p-8 text-left space-y-4"
+                  className={`glassmorphism rounded-2xl p-8 text-left space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}
                   data-testid={`community-feature-${index}`}
                 >
                   <div className="flex items-center space-x-3 mb-4">
                     <feature.icon className={`w-6 h-6 ${feature.color}`} />
-                    <h3 className="font-semibold text-xl">{feature.title}</h3>
+                    <h3 className={`font-semibold text-xl ${theme === 'dark' ? 'text-white' : ''}`}>{feature.title}</h3>
                   </div>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <p className={theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}>{feature.description}</p>
                 </div>
               ))}
             </div>
 
-            <div className="glassmorphism rounded-2xl p-8 space-y-4">
-              <h3 className="font-semibold text-xl">The Integration Vision</h3>
-              <p className="text-muted-foreground text-lg">
+            <div className={`glassmorphism rounded-2xl p-8 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
+              <h3 className={`font-semibold text-xl ${theme === 'dark' ? 'text-white' : ''}`}>The Integration Vision</h3>
+              <p className={`text-muted-foreground text-lg ${theme === 'dark' ? 'text-gray-300' : ''}`}>
                 From lot management to community building - Albert's got both covered.
                 Your customers don't just buy cars, they live car life. Soon, you'll connect both sides of your business.
               </p>
@@ -544,31 +544,31 @@ export default function Landing() {
       </section>
 
       {/* Support & Real Testimonials Section */}
-      <section id="support" className="py-16" data-testid="support-section">
+      <section id="support" className={`py-16 ${theme === 'dark' ? 'bg-gray-900' : ''}`} data-testid="support-section">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Real Testimonials & Success Stories */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <h2 className="font-queen text-4xl lg:text-5xl font-bold">
+                <h2 className={`font-queen text-4xl lg:text-5xl font-bold ${theme === 'dark' ? 'text-white' : ''}`}>
                   Proven Success Stories
                 </h2>
-                <p className="text-xl text-muted-foreground">
+                <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}`}>
                   Real dealers, real results. Our team has been moving metal and solving problems for dealers nationwide for years.
                 </p>
               </div>
 
               {/* Real Testimonials */}
               <div className="space-y-6">
-                <div className="glassmorphism rounded-2xl p-6 space-y-4">
+                <div className={`glassmorphism rounded-2xl p-6 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
                   <div className="flex items-start space-x-3">
                     <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
                       <Users className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold">Cephas Maqowr</h4>
-                      <p className="text-sm text-muted-foreground mb-3">Verified Cargram Customer</p>
-                      <p className="text-muted-foreground italic">
+                      <h4 className={theme === 'dark' ? 'text-white font-semibold' : 'font-semibold'}>Cephas Maqowr</h4>
+                      <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-muted-foreground'} mb-3`}>Verified Cargram Customer</p>
+                      <p className={theme === 'dark' ? 'text-gray-300 italic' : 'text-muted-foreground italic'}>
                         "The team went above and beyond on a Friday evening when our internet went down...
                         the extra effort means the difference between making it and not being open"
                       </p>
@@ -576,15 +576,15 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <div className="glassmorphism rounded-2xl p-6 space-y-4">
+                <div className={`glassmorphism rounded-2xl p-6 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
                   <div className="flex items-start space-x-3">
                     <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
                       <Building className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold">CMJ Motors</h4>
-                      <p className="text-sm text-muted-foreground mb-3">Verified Cargram Customer</p>
-                      <p className="text-muted-foreground italic">
+                      <h4 className={theme === 'dark' ? 'text-white font-semibold' : 'font-semibold'}>CMJ Motors</h4>
+                      <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-muted-foreground'} mb-3`}>Verified Cargram Customer</p>
+                      <p className={theme === 'dark' ? 'text-gray-300 italic' : 'text-muted-foreground italic'}>
                         "The entire Cargram team... true professionals who consistently
                         monitor and update their system to topple the competition"
                       </p>
@@ -618,8 +618,8 @@ export default function Landing() {
                   <div key={index} className="flex items-center space-x-3">
                     <feature.icon className={`w-5 h-5 ${feature.color}`} />
                     <div>
-                      <span className="font-medium">{feature.title}:</span>
-                      <span className="text-muted-foreground ml-2">{feature.description}</span>
+                      <span className={`font-medium ${theme === 'dark' ? 'text-white' : ''}`}>{feature.title}:</span>
+                      <span className={`ml-2 ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}`}>{feature.description}</span>
                     </div>
                   </div>
                 ))}
@@ -639,7 +639,7 @@ export default function Landing() {
                 <Button
                   variant="secondary"
                   size="xl"
-                  className="capsule-btn"
+                  className={`capsule-btn ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600' : ''}`}
                   data-testid="learn-more-button"
                 >
                   <Info className="w-5 h-5" />
@@ -650,21 +650,21 @@ export default function Landing() {
 
             {/* Company Focus */}
             <div className="flex justify-center" data-testid="support-visual">
-              <div className="glassmorphism rounded-3xl p-8 w-full max-w-md space-y-6">
+              <div className={`glassmorphism rounded-3xl p-8 w-full max-w-md space-y-6 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
                 <div className="text-center space-y-4">
                   <div className="w-20 h-20 bg-gradient-to-br from-primary to-orange-500 rounded-2xl flex items-center justify-center mx-auto">
                     <Car className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-queen text-2xl font-bold">Cargram</h3>
-                    <p className="text-muted-foreground">Automotive Software & Community</p>
+                    <h3 className={`font-queen text-2xl font-bold ${theme === 'dark' ? 'text-white' : ''}`}>Cargram</h3>
+                    <p className={theme === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}>Automotive Software & Community</p>
                   </div>
                 </div>
 
                 <div className="space-y-4 text-sm">
                   <div className="space-y-2">
-                    <h4 className="font-semibold">What We Do:</h4>
-                    <ul className="space-y-1 text-muted-foreground">
+                    <h4 className={`font-semibold ${theme === 'dark' ? 'text-white' : ''}`}>What We Do:</h4>
+                    <ul className={`space-y-1 ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}`}>
                       <li>• Professional DMS for dealerships</li>
                       <li>• Mobile-first, lightning fast</li>
                       <li>• Complete integrations ecosystem</li>
@@ -673,9 +673,9 @@ export default function Landing() {
                     </ul>
                   </div>
 
-                  <div className="bg-secondary/50 rounded-xl p-4">
-                    <h4 className="font-semibold mb-2">Our Vision:</h4>
-                    <p className="text-muted-foreground text-xs">
+                  <div className={`rounded-xl p-4 ${theme === 'dark' ? 'bg-gray-700' : 'bg-secondary/50'}`}>
+                    <h4 className={`font-semibold mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Our Vision:</h4>
+                    <p className={`text-xs ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}`}>
                       "Your customers don't just buy cars - they live car life.
                       We're connecting both sides of the automotive world."
                     </p>
@@ -688,7 +688,7 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-accent/50 py-12" data-testid="footer">
+      <footer className={`py-12 ${theme === 'dark' ? 'bg-gray-800/90' : 'bg-accent/50'}`} data-testid="footer">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             {/* Footer Brand */}
@@ -697,11 +697,11 @@ export default function Landing() {
                 <div className="w-10 h-10 bg-gradient-to-br from-primary to-orange-500 rounded-2xl flex items-center justify-center">
                   <Car className="w-6 h-6 text-white" />
                 </div>
-                <span className="font-instagram text-2xl font-bold gradient-text">
+                <span className={`font-instagram text-2xl font-bold gradient-text ${theme === 'dark' ? 'text-white' : ''}`}>
                   Cargram
                 </span>
               </div>
-              <p className="text-muted-foreground text-sm">
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}`}>
                 The premier automotive community platform. Built by enthusiasts,
                 for enthusiasts.
               </p>
@@ -716,7 +716,7 @@ export default function Landing() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-secondary hover:bg-accent rounded-full flex items-center justify-center transition-colors"
+                    className={`w-10 h-10 ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600' : 'bg-secondary hover:bg-accent'} rounded-full flex items-center justify-center transition-colors`}
                     data-testid={`social-${social.label.toLowerCase()}`}
                     aria-label={`Visit our ${social.label} page`}
                   >
@@ -742,13 +742,13 @@ export default function Landing() {
               },
             ].map((section, index) => (
               <div key={index} className="space-y-4" data-testid={`footer-section-${index}`}>
-                <h3 className="font-semibold">{section.title}</h3>
+                <h3 className={`font-semibold ${theme === 'dark' ? 'text-white' : ''}`}>{section.title}</h3>
                 <div className="space-y-2 text-sm">
                   {section.links.map((link, linkIndex) => (
                     <a
                       key={linkIndex}
                       href={link === "Privacy Policy" ? "https://cargram.app/privacy" : "#"}
-                      className="block text-muted-foreground hover:text-foreground transition-colors"
+                      className={`block transition-colors ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}
                       data-testid={`footer-link-${link.toLowerCase().replace(' ', '-')}`}
                       {...(link === "Privacy Policy" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
@@ -760,8 +760,8 @@ export default function Landing() {
             ))}
           </div>
 
-          <div className="border-t border-border mt-12 pt-8 text-center">
-            <p className="text-sm text-muted-foreground">
+          <div className={`border-t border-border mt-12 pt-8 text-center ${theme === 'dark' ? 'border-gray-700' : ''}`}>
+            <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
               © 2024 Cargram. All rights reserved. | Orange County, California
             </p>
           </div>

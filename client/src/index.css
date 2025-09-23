@@ -33,31 +33,31 @@
 }
 
 .dark {
-  --background: hsl(220 13% 8%);
-  --foreground: hsl(210 40% 98%);
-  --card: hsl(220 13% 10%);
-  --card-foreground: hsl(210 40% 98%);
-  --popover: hsl(220 13% 10%);
-  --popover-foreground: hsl(210 40% 98%);
+  --background: hsl(0 0% 5%);        /* Very dark background */
+  --foreground: hsl(0 0% 98%);       /* White text */
+  --card: hsl(0 0% 8%);              /* Dark card background */
+  --card-foreground: hsl(0 0% 98%);  /* White card text */
+  --popover: hsl(0 0% 8%);
+  --popover-foreground: hsl(0 0% 98%);
   --primary: hsl(214 100% 59%);
-  --primary-foreground: hsl(210 40% 98%);
-  --secondary: hsl(220 13% 15%);
-  --secondary-foreground: hsl(210 40% 98%);
-  --muted: hsl(220 13% 15%);
-  --muted-foreground: hsl(215 20.2% 65.1%);
-  --accent: hsl(220 13% 15%);
-  --accent-foreground: hsl(210 40% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(210 40% 98%);
-  --border: hsl(220 13% 20%);
-  --input: hsl(220 13% 15%);
-  --ring: hsl(212.7 26.8% 83.9%);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(0 0% 12%);        /* Dark secondary */
+  --secondary-foreground: hsl(0 0% 98%);
+  --muted: hsl(0 0% 12%);
+  --muted-foreground: hsl(0 0% 70%);
+  --accent: hsl(0 0% 12%);
+  --accent-foreground: hsl(0 0% 98%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(0 0% 20%);           /* Dark borders */
+  --input: hsl(0 0% 10%);            /* Dark inputs */
+  --ring: hsl(0 0% 80%);             /* Light ring */
 
   /* Custom automotive colors for dark mode */
   --automotive-blue: hsl(214 100% 59%);
   --automotive-orange: hsl(24 100% 50%);
-  --automotive-dark: hsl(220 13% 8%);
-  --automotive-gray: hsl(220 13% 25%);
+  --automotive-dark: hsl(0 0% 5%);
+  --automotive-gray: hsl(0 0% 20%);
 }
 
 @layer base {
@@ -109,7 +109,7 @@
 .dark .glassmorphism {
   background: hsl(var(--card) / 0.95);
   border: 1px solid hsl(var(--border));
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);  /* Light shadow */
   color: hsl(var(--card-foreground));
 }
 
@@ -126,7 +126,7 @@
 .dark .header-glassmorphism {
   background: hsl(var(--background) / 0.90);
   border-bottom: 1px solid hsl(var(--border));
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);  /* Light shadow */
   color: hsl(var(--foreground));
 }
 
@@ -211,7 +211,7 @@
 
 .dark .card-soft-shadow {
   background: hsl(var(--card));
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);  /* Light shadow */
   border: 1px solid hsl(var(--border));
   color: hsl(var(--card-foreground));
 }
