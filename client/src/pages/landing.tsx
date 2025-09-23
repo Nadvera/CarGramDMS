@@ -476,6 +476,36 @@ export default function Landing() {
               </div>
             </div>
 
+            {/* Phone iframe */}
+            <div className="flex justify-center my-12">
+              <div className="w-80 h-[600px] bg-black rounded-[25px] p-2 shadow-2xl">
+                <a href="https://cargram.app" target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                  <div className="w-full h-full bg-white rounded-[20px] overflow-hidden">
+                    <iframe
+                      src="https://cargram.app"
+                      className="w-full h-full"
+                      onLoad={() => setIframeLoaded(true)}
+                      onError={() => setIframeError(true)}
+                      title="Cargram App Preview"
+                    />
+                    {!iframeLoaded && !iframeError && (
+                      <div className="absolute inset-0 bg-gray-200 rounded-[20px] flex items-center justify-center">
+                        <div className="text-gray-500">Loading Cargram...</div>
+                      </div>
+                    )}
+                    {iframeError && (
+                      <div className="absolute inset-0 bg-gray-100 rounded-[20px] flex items-center justify-center">
+                        <div className="text-center text-gray-600">
+                          <div className="mb-2">Preview unavailable</div>
+                          <div className="text-sm">Click to visit Cargram</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </a>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
@@ -521,56 +551,17 @@ export default function Landing() {
               ))}
             </div>
 
-            <div className={`glassmorphism rounded-2xl p-8 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
-              <h3 className={`font-semibold text-xl ${theme === 'dark' ? 'text-white' : ''}`}>The Integration Vision</h3>
-              <p className={`text-muted-foreground text-lg ${theme === 'dark' ? 'text-gray-300' : ''}`}>
-                From lot management to community building - Albert's got both covered.
-                Your customers don't just buy cars, they live car life. Soon, you'll connect both sides of your business.
-              </p>
-              <Button
-                asChild
-                variant="orange"
-                className="capsule-btn"
-                data-testid="join-beta-button"
-              >
-                <a href="https://cargram.app" target="_blank" rel="noopener noreferrer">
-                  <Users className="w-5 h-5" />
-                  Join Beta Community
-                </a>
-              </Button>
-              
-              {/* Phone iframe with 3D metallic effect */}
-              <div className="flex justify-center mt-12">
-                <div className="phone-frame-3d">
-                  <a href="https://cargram.app" target="_blank" rel="noopener noreferrer" className="block">
-                    <div className="phone-container-3d">
-                      <div className="phone-screen-3d">
-                        <iframe
-                          src="https://cargram.app"
-                          className="w-full h-full rounded-[18px]"
-                          onLoad={() => setIframeLoaded(true)}
-                          onError={() => setIframeError(true)}
-                          title="Cargram App Preview"
-                        />
-                        {!iframeLoaded && !iframeError && (
-                          <div className="absolute inset-0 bg-gray-200 rounded-[18px] flex items-center justify-center">
-                            <div className="text-gray-500">Loading Cargram...</div>
-                          </div>
-                        )}
-                        {iframeError && (
-                          <div className="absolute inset-0 bg-gray-100 rounded-[18px] flex items-center justify-center">
-                            <div className="text-center text-gray-600">
-                              <div className="mb-2">Preview unavailable</div>
-                              <div className="text-sm">Click to visit Cargram</div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
+            <Button
+              asChild
+              variant="orange"
+              className="capsule-btn"
+              data-testid="join-beta-button"
+            >
+              <a href="https://cargram.app" target="_blank" rel="noopener noreferrer">
+                <Users className="w-5 h-5" />
+                Join Beta Community
+              </a>
+            </Button>
           </div>
         </div>
       </section>
