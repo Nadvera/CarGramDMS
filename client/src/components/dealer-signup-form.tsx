@@ -316,7 +316,7 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
                             <SelectValue placeholder="Select inventory size" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent>
+                        <SelectContent className="select-content">
                           <SelectItem value="1-25">1-25 vehicles</SelectItem>
                           <SelectItem value="26-50">26-50 vehicles</SelectItem>
                           <SelectItem value="51-100">51-100 vehicles</SelectItem>

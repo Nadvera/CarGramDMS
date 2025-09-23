@@ -91,6 +91,7 @@
   font-weight: 700;
 }
 
+
 /* Capsule button styles */
 .capsule-btn {
   border-radius: 9999px;
@@ -105,33 +106,26 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
+.select-content:hover{background: dodgerblue; color: white;}
+
+
 
 /* Clean cards with soft shadows */
-.glassmorphism {
+.select-content, .glassmorphism {
   background: hsl(var(--card) / 0.95);
   backdrop-filter: blur(10px);
   border: 1px solid hsl(var(--border));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  color: hsl(var(--card-foreground));
+  color: white;
 }
 
-.dark .glassmorphism {
+.dark .glassmorphism, .dark .select-content  {
+
   background: hsl(var(--card) / 0.95);
   border: 1px solid hsl(var(--border));
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
   /* Light shadow */
-  color: hsl(var(--card-foreground));
-}
-
-/* Select dropdown fix - make content fully opaque */
-.select-content {
-  background: hsl(var(--popover)) !important;
-  backdrop-filter: none !important;
-}
-
-.dark .select-content {
-  background: hsl(var(--popover)) !important;
-  backdrop-filter: none !important;
+  color: white
 }
 
 /* Header glassmorphism */
@@ -214,6 +208,7 @@
   color: hsl(var(--foreground));
   min-height: 44px;
 }
+
 
 
 
