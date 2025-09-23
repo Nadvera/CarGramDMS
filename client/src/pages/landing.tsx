@@ -37,6 +37,7 @@ import {
   Info,
   Send,
   MapPin,
+  Mail,
 } from "lucide-react";
 
 export default function Landing() {
