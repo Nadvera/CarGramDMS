@@ -1,4 +1,3 @@
-
 export class ErrorLogger {
   static log(error: Error, context?: string) {
     const timestamp = new Date().toISOString();
