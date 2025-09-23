@@ -538,6 +538,38 @@ export default function Landing() {
                   Join Beta Community
                 </a>
               </Button>
+              
+              {/* Phone iframe with 3D effect */}
+              <div className="flex justify-center mt-8">
+                <div className="phone-frame">
+                  <a href="https://cargram.app" target="_blank" rel="noopener noreferrer" className="block">
+                    <div className="phone-container">
+                      <div className="phone-screen">
+                        <iframe
+                          src="https://cargram.app"
+                          className="w-full h-full rounded-xl"
+                          onLoad={() => setIframeLoaded(true)}
+                          onError={() => setIframeError(true)}
+                          title="Cargram App Preview"
+                        />
+                        {!iframeLoaded && !iframeError && (
+                          <div className="absolute inset-0 bg-gray-200 rounded-xl flex items-center justify-center">
+                            <div className="text-gray-500">Loading Cargram...</div>
+                          </div>
+                        )}
+                        {iframeError && (
+                          <div className="absolute inset-0 bg-gray-100 rounded-xl flex items-center justify-center">
+                            <div className="text-center text-gray-600">
+                              <div className="mb-2">Preview unavailable</div>
+                              <div className="text-sm">Click to visit Cargram</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
