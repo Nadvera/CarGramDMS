@@ -63,38 +63,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Dealer signup endpoint
   app.post("/api/dealer-signup", async (req, res) => {
+    console.log("Received dealer signup request:", req.body);
+    
     try {
       const validatedData = insertDealerSignupSchema.parse(req.body);
+      console.log("Validation successful:", validatedData);
 
       // Create dealer signup in database
       let signup;
       try {
+        console.log("Attempting to create dealer signup in database...");
         signup = await storage.createDealerSignup(validatedData);
-        console.log("New dealer signup:", signup);
+        console.log("Database signup successful:", signup);
       } catch (dbError) {
         console.error("Database error during dealer signup:", dbError);
         return res.status(500).json({ 
           message: "Database connection error. Please try again later.",
-          success: false
+          success: false,
+          error: dbError.message
         });
       }
 
-      // Send notification email to help@cargram.io
-      const notificationSent = await sendDealerSignupNotification(validatedData);
-
-      // Send welcome email to dealer
-      const welcomeSent = await sendDealerWelcomeEmail(validatedData.email, validatedData.dealershipName);
+      // Send notification email to help@cargram.io (skip for now to avoid blocking)
+      console.log("Skipping email notifications for debugging...");
+      // const notificationSent = await sendDealerSignupNotification(validatedData);
+      // const welcomeSent = await sendDealerWelcomeEmail(validatedData.email, validatedData.dealershipName);
 
       res.json({ 
         message: "Thank you for your interest in Cargram Pro! We'll be in touch within 24 hours.",
         success: true,
-        signupId: signup.id,
-        emailsStatus: {
-          notificationSent,
-          welcomeSent
-        }
+        signupId: signup.id
       });
     } catch (error) {
+      console.error("Full dealer signup error:", error);
+      
       if (error instanceof z.ZodError) {
         return res.status(400).json({ 
           message: error.errors[0].message,
@@ -103,10 +105,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      console.error("Dealer signup error:", error);
       res.status(500).json({ 
         message: "Failed to submit signup. Please try again.",
-        success: false
+        success: false,
+        error: error.message
       });
     }
   });

@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription } from "@shared/schema";
+import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type InsertDealerSignup } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {

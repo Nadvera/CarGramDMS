@@ -25,6 +25,27 @@ pool.on('error', (err) => {
 export async function initializeDatabase() {
   const client = await pool.connect();
   try {
+    // Create users table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id TEXT PRIMARY KEY,
+        username TEXT UNIQUE NOT NULL,
+        passwordHash TEXT NOT NULL,
+        email TEXT,
+        name TEXT
+      )
+    `);
+
+    // Create email_subscriptions table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS email_subscriptions (
+        id SERIAL PRIMARY KEY,
+        email TEXT UNIQUE NOT NULL,
+        isActive BOOLEAN DEFAULT true,
+        signup_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
     // Create dealer_signups table
     await client.query(`
       CREATE TABLE IF NOT EXISTS dealer_signups (
@@ -47,9 +68,10 @@ export async function initializeDatabase() {
       )
     `);
     
-    console.log('Database tables initialized');
+    console.log('Database tables initialized successfully');
   } catch (error) {
     console.error('Error initializing database:', error);
+    throw error;
   } finally {
     client.release();
   }
