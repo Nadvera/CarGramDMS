@@ -233,23 +233,21 @@ export default function Landing() {
             <div className="space-y-8 fade-in-up" data-testid="hero-content">
               <div className="space-y-4">
                 <h1 className="font-queen text-5xl lg:text-7xl font-bold leading-tight text-white">
-                  Welcome to
+                  Built by
                   <span className="font-instagram block text-transparent bg-gradient-to-r from-blue-300 to-orange-300 bg-clip-text">
-                    Cargram
+                    Albert Deilami
                   </span>
                 </h1>
                 <p className="text-xl lg:text-2xl text-blue-100 max-w-lg font-medium">
-                  The ultimate automotive community where passion meets
-                  technology. Connect, share, and discover with fellow car
-                  enthusiasts worldwide.
+                  12 Years Under the Hood. From DealerClick DMS that moves metal to Cargram social where car culture lives.
                 </p>
               </div>
 
               {/* Hero Stats */}
               <div className="flex flex-wrap gap-8 text-sm" data-testid="hero-stats">
                 <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5 text-orange-400" />
-                  <span>50K+ Members</span>
+                  <Building className="w-5 h-5 text-orange-400" />
+                  <span>Hundreds of Dealers</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-5 h-5 text-orange-400" />
@@ -257,23 +255,20 @@ export default function Landing() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPin className="w-5 h-5 text-orange-400" />
-                  <span>Orange County, CA</span>
+                  <span>Nationwide Coverage</span>
                 </div>
               </div>
 
               {/* Hero Actions */}
               <div className="flex flex-col sm:flex-row gap-4" data-testid="hero-actions">
                 <Button
-                  asChild
                   variant="orange"
                   size="xl"
                   className="capsule-btn"
-                  data-testid="join-community-button"
+                  data-testid="demo-dms-button"
                 >
-                  <a href="https://cargram.app" target="_blank" rel="noopener noreferrer">
-                    <Rocket className="w-5 h-5" />
-                    Join Community
-                  </a>
+                  <Zap className="w-5 h-5" />
+                  Demo DealerClick DMS
                 </Button>
                 <Button
                   onClick={scrollToForm}
@@ -288,78 +283,34 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Hero Visual */}
+            {/* Hero Visual - DMS Screenshot */}
             <div className="flex justify-center lg:justify-end" data-testid="hero-visual">
               <div className="relative">
-                {/* Modern phone mockup with iframe */}
-                <div className="w-80 max-w-full h-[640px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl float-animation sm:scale-100 scale-75 origin-center">
-                  <div className="w-full h-full bg-black rounded-[2.5rem] overflow-hidden relative">
-                    {/* Phone notch/status bar */}
-                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-2xl z-10"></div>
-
-                    {/* Loading state */}
-                    {!iframeLoaded && !iframeError && (
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700 flex flex-col items-center justify-center text-white z-20">
-                        <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center mb-4">
-                          <Car className="w-10 h-10 text-blue-600 animate-pulse" />
-                        </div>
-                        <h3 className="font-instagram text-lg font-bold mb-2">Cargram</h3>
-                        <p className="text-blue-100 text-sm">Loading live preview...</p>
-                      </div>
-                    )}
-
-                    {/* Error fallback */}
-                    {iframeError && (
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700 flex flex-col items-center justify-center text-white z-20">
-                        <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center mb-4">
-                          <Car className="w-10 h-10 text-blue-600" />
-                        </div>
-                        <h3 className="font-instagram text-lg font-bold mb-2">Cargram</h3>
-                        <p className="text-blue-100 text-sm text-center px-4">
-                          Your automotive social hub
-                        </p>
-                        <div className="space-y-3 w-full px-8 mt-6">
-                          <div className="h-2 bg-white/20 rounded-full"></div>
-                          <div className="h-2 bg-white/30 rounded-full w-3/4"></div>
-                          <div className="h-2 bg-white/10 rounded-full w-1/2"></div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Iframe */}
-                    <iframe
-                      src="https://cargram.app"
-                      className="w-full h-full border-0 rounded-[2.5rem]"
-                      style={{ 
-                        transform: 'scale(0.85)',
-                        transformOrigin: 'top left',
-                        width: '117.6%',
-                        height: '117.6%'
-                      }}
-                      onLoad={() => {
-                        setIframeLoaded(true);
-                        setIframeError(false);
-                      }}
-                      onError={() => {
-                        setIframeError(true);
-                        setIframeLoaded(false);
-                      }}
-                      data-testid="cargram-app-iframe"
-                      title="Cargram App Preview"
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                      sandbox="allow-same-origin allow-scripts allow-forms allow-popups-to-escape-sandbox"
-                      allow="clipboard-write; autoplay"
+                {/* Modern desktop mockup with DMS screenshot */}
+                <div className="bg-gray-900 rounded-2xl p-4 shadow-2xl float-animation">
+                  <div className="bg-gray-800 rounded-t-xl px-4 py-2 flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div className="flex-1 bg-gray-700 rounded px-3 py-1 text-gray-300 text-sm text-center">
+                      DealerClick DMS - Lightning Fast
+                    </div>
+                  </div>
+                  <div className="w-full max-w-2xl">
+                    <img 
+                      src="/images/homeHero.webp" 
+                      alt="DealerClick DMS Dashboard" 
+                      className="w-full h-auto rounded-b-xl"
                     />
                   </div>
                 </div>
 
-                {/* Floating elements */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <Heart className="w-8 h-8 text-white" />
+                {/* Floating badges */}
+                <div className="absolute -top-4 -right-4 bg-orange-500 rounded-xl px-3 py-2 shadow-lg">
+                  <span className="text-white text-sm font-bold">Mobile First</span>
                 </div>
-                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <Share2 className="w-8 h-8 text-white" />
+                <div className="absolute -bottom-4 -left-4 bg-green-500 rounded-xl px-3 py-2 shadow-lg">
+                  <span className="text-white text-sm font-bold">eContracting</span>
                 </div>
               </div>
             </div>
@@ -426,64 +377,63 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section - DMS Focus */}
       <section id="features" className="py-16" data-testid="features-section">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-queen text-4xl lg:text-5xl font-bold mb-6">
-              Why Choose Cargram?
+              DealerClick DMS - Built Different
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Built by automotive enthusiasts, for automotive enthusiasts.
-              Experience the difference that 12+ years of industry expertise
-              makes.
+              The mobile-first DMS that closes deals on the lot, not just in the office. 
+              5 years perfecting the platform, hundreds of dealers coast to coast.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature Cards */}
+            {/* DMS Feature Cards */}
             {[
               {
-                icon: Users,
-                title: "Authentic Community",
+                icon: Zap,
+                title: "Lightning Fast eContracting",
                 description:
-                  "Connect with real car enthusiasts, not bots. Our verified community ensures genuine automotive conversations and connections.",
+                  "Close deals at the speed of handshakes. Sign contracts on mobile, tablet, or desktop with instant processing.",
+                gradient: "from-yellow-500 to-orange-500",
+              },
+              {
+                icon: Users,
+                title: "Fully Mobile Responsive",
+                description:
+                  "DMS that works in the lot, not just the office. Manage inventory, customers, and sales from anywhere.",
                 gradient: "from-primary to-blue-600",
               },
               {
-                icon: Camera,
-                title: "Showcase Your Build",
+                icon: ShieldCheck,
+                title: "All Major Integrations",
                 description:
-                  "Share your automotive journey with high-quality photo sharing, build documentation, and modification tracking.",
-                gradient: "from-orange-500 to-red-500",
-              },
-              {
-                icon: TrendingUp,
-                title: "Industry Insights",
-                description:
-                  "Stay ahead with market trends, new releases, and expert analysis from our 12+ years in the automotive industry.",
+                  "DataOne, KBB, AutoCheck, CarFax, 700Credit, Payment Processing, BHPH, Motives Insurance, All major lenders + Plaid.",
                 gradient: "from-green-500 to-emerald-600",
               },
               {
-                icon: MapPin,
-                title: "Local Events",
+                icon: TrendingUp,
+                title: "Extremely Easy to Use",
                 description:
-                  "Discover car shows, meetups, and automotive events in your area. Connect offline with your online community.",
+                  "Built for hustlers, not IT departments. Your team will be productive in minutes, not months.",
                 gradient: "from-purple-500 to-indigo-600",
               },
               {
-                icon: ShieldCheck,
-                title: "Safe & Secure",
+                icon: Building,
+                title: "BHPH Specialists",
                 description:
-                  "Your data and privacy are protected with enterprise-grade security. Focus on your passion, not privacy concerns.",
+                  "From independent lots to BHPH specialists. We speak every dealership's language with custom workflows.",
                 gradient: "from-pink-500 to-rose-600",
               },
               {
-                icon: Zap,
-                title: "Lightning Fast",
+                icon: Camera,
+                title: "Coming Soon: Social Integration",
                 description:
-                  "Built with modern technology for instant loading and smooth interactions. No more waiting for your content to load.",
-                gradient: "from-yellow-500 to-orange-500",
+                  "Your customers don't just buy cars - they live car life. Soon, connect your DMS to automotive social marketplace.",
+                gradient: "from-orange-500 to-red-500",
               },
             ].map((feature, index) => (
               <div
@@ -506,7 +456,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Community Ideology Section */}
+      {/* Community Section - Cargram Social Coming Soon */}
       <section
         id="community"
         className="py-16 bg-gradient-to-br from-primary/5 to-orange-500/5"
@@ -516,128 +466,162 @@ export default function Landing() {
           <div className="max-w-4xl mx-auto text-center space-y-12">
             <div className="space-y-6">
               <h2 className="font-queen text-4xl lg:text-5xl font-bold">
-                Our Automotive Philosophy
+                Coming Soon: Cargram Social
               </h2>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                At Cargram, we believe that every car has a story, every
-                modification has meaning, and every enthusiast deserves a
-                platform to share their passion. We're not just building an app
-                – we're cultivating a culture.
+                The DMS guy who actually gets car culture is building social too. 
+                Where proven business software meets automotive passion - connecting both sides of the car world.
               </p>
+              <div className="inline-flex items-center space-x-2 bg-orange-500/10 rounded-full px-4 py-2">
+                <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                <span className="text-sm text-orange-600 font-medium">Small beta community, big vision ahead</span>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
                   icon: Heart,
-                  title: "Passion First",
+                  title: "Automotive Social Marketplace",
                   description:
-                    "We understand that cars aren't just transportation – they're extensions of personality, dreams made tangible, and art in motion. Every feature we build honors this passion.",
+                    "Evolving into where passion meets commerce. Show off inventory, connect over car culture, and discover your next ride through community.",
                   color: "text-red-500",
                 },
                 {
-                  icon: Handshake,
-                  title: "Community Driven",
+                  icon: Calendar,
+                  title: "Events & Meets",
                   description:
-                    "Real enthusiasts helping real enthusiasts. Our platform facilitates authentic connections, knowledge sharing, and mutual respect among car lovers worldwide.",
+                    "Car shows, meetups, and automotive events. Bringing digital relationships to real gatherings where rubber meets the road.",
                   color: "text-blue-500",
                 },
                 {
                   icon: Target,
-                  title: "Quality Over Quantity",
+                  title: "DMS + Social Integration",
                   description:
-                    "We prioritize meaningful interactions over vanity metrics. Every tool, every feature, every update is designed to enhance your automotive journey.",
+                    "Dealers showing off inventory on social. Customers connecting over car culture. Business software that understands car life.",
                   color: "text-green-500",
                 },
                 {
                   icon: Clock,
-                  title: "Legacy Mindset",
+                  title: "Currently Beta Phase",
                   description:
-                    "With 12+ years in the industry, we're not chasing trends – we're setting them. We build for the long haul, just like the classic cars we admire.",
+                    "Functional but not finished. Growing organically with real car enthusiasts who understand the vision of authentic automotive community.",
                   color: "text-purple-500",
                 },
-              ].map((ideology, index) => (
+              ].map((feature, index) => (
                 <div
                   key={index}
                   className="glassmorphism rounded-2xl p-8 text-left space-y-4"
-                  data-testid={`ideology-card-${index}`}
+                  data-testid={`community-feature-${index}`}
                 >
                   <div className="flex items-center space-x-3 mb-4">
-                    <ideology.icon className={`w-6 h-6 ${ideology.color}`} />
-                    <h3 className="font-semibold text-xl">{ideology.title}</h3>
+                    <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                    <h3 className="font-semibold text-xl">{feature.title}</h3>
                   </div>
-                  <p className="text-muted-foreground">{ideology.description}</p>
+                  <p className="text-muted-foreground">{feature.description}</p>
                 </div>
               ))}
+            </div>
+
+            <div className="glassmorphism rounded-2xl p-8 space-y-4">
+              <h3 className="font-semibold text-xl">The Integration Vision</h3>
+              <p className="text-muted-foreground text-lg">
+                From lot management to community building - Albert's got both covered. 
+                Your customers don't just buy cars, they live car life. Soon, you'll connect both sides of your business.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                className="capsule-btn"
+                data-testid="join-beta-button"
+              >
+                <a href="https://cargram.app" target="_blank" rel="noopener noreferrer">
+                  <Users className="w-5 h-5" />
+                  Join Beta Community
+                </a>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Support & Dealer Management Section */}
+      {/* Support & Real Testimonials Section */}
       <section id="support" className="py-16" data-testid="support-section">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Support Content */}
+            {/* Real Testimonials & Success Stories */}
             <div className="space-y-8">
               <div className="space-y-6">
                 <h2 className="font-queen text-4xl lg:text-5xl font-bold">
-                  Enterprise Solutions
+                  Proven Success Stories
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  Beyond our community platform, we provide comprehensive dealer
-                  management software and automotive business solutions across
-                  Orange County and beyond. We collect and use your data solely
-                  to enhance your automotive community experience, connect you
-                  with relevant content, and improve our services.
+                <p className="text-xl text-muted-foreground">
+                  Real dealers, real results. Albert and the DealerClick team have been moving metal and solving problems for dealers nationwide since the beginning.
                 </p>
               </div>
 
-              {/* Support Features */}
+              {/* Real Testimonials */}
               <div className="space-y-6">
+                <div className="glassmorphism rounded-2xl p-6 space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                      <Users className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold">Cephas Maqowr</h4>
+                      <p className="text-sm text-muted-foreground mb-3">Verified DealerClick Customer</p>
+                      <p className="text-muted-foreground italic">
+                        "Albert went above and beyond on a Friday evening when our internet went down... 
+                        the extra effort means the difference between making it and not being open"
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="glassmorphism rounded-2xl p-6 space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                      <Building className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold">CMJ Motors</h4>
+                      <p className="text-sm text-muted-foreground mb-3">Verified DealerClick Customer</p>
+                      <p className="text-muted-foreground italic">
+                        "Calvin, Albert, and the entire team... true professionals who consistently 
+                        monitor and update their system to topple the competition"
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Support Features */}
+              <div className="space-y-4">
                 {[
                   {
-                    icon: Building,
-                    title: "Dealer Management Software",
-                    description:
-                      "Streamline inventory, sales, and customer relationships with our industry-leading DMS solutions.",
-                    color: "text-primary",
-                    bgColor: "bg-primary/10",
+                    icon: Headphones,
+                    title: "Friday Evening Support",
+                    description: "Real support when you need it most - not just business hours.",
+                    color: "text-green-500",
+                  },
+                  {
+                    icon: TrendingUp,
+                    title: "Constantly Evolving",
+                    description: "Regular updates and improvements to stay ahead of the competition.",
+                    color: "text-blue-500",
                   },
                   {
                     icon: MapPin,
-                    title: "Orange County Expertise",
-                    description:
-                      "Deep local market knowledge with 12+ years serving Southern California's automotive industry.",
+                    title: "Nationwide Coverage",
+                    description: "Serving hundreds of dealers coast to coast with local expertise.",
                     color: "text-orange-500",
-                    bgColor: "bg-orange-500/10",
-                  },
-                  {
-                    icon: Headphones,
-                    title: "24/7 Support",
-                    description:
-                      "Round-the-clock technical support ensuring your business never misses a beat.",
-                    color: "text-green-500",
-                    bgColor: "bg-green-500/10",
                   },
                 ].map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start space-x-4"
-                    data-testid={`support-feature-${index}`}
-                  >
-                    <div
-                      className={`w-12 h-12 ${feature.bgColor} rounded-full flex items-center justify-center flex-shrink-0`}
-                    >
-                      <feature.icon className={`w-6 h-6 ${feature.color}`} />
-                    </div>
+                  <div key={index} className="flex items-center space-x-3">
+                    <feature.icon className={`w-5 h-5 ${feature.color}`} />
                     <div>
-                      <h3 className="font-semibold text-lg mb-2">
-                        {feature.title}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {feature.description}
-                      </p>
+                      <span className="font-medium">{feature.title}:</span>
+                      <span className="text-muted-foreground ml-2">{feature.description}</span>
                     </div>
                   </div>
                 ))}
@@ -652,7 +636,7 @@ export default function Landing() {
                   data-testid="contact-sales-button"
                 >
                   <Phone className="w-5 h-5" />
-                  Contact Sales
+                  Get DealerClick Demo
                 </Button>
                 <Button
                   variant="secondary"
@@ -661,94 +645,42 @@ export default function Landing() {
                   data-testid="learn-more-button"
                 >
                   <Info className="w-5 h-5" />
-                  Learn More
+                  Success Stories
                 </Button>
               </div>
             </div>
 
-            {/* Support Visual - Dashboard Mockup */}
+            {/* Albert's Story */}
             <div className="flex justify-center" data-testid="support-visual">
-              <div className="glassmorphism rounded-3xl p-8 w-full max-w-md">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-lg">Dealer Dashboard</h3>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="glassmorphism rounded-3xl p-8 w-full max-w-md space-y-6">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary to-orange-500 rounded-2xl flex items-center justify-center mx-auto">
+                    <span className="text-2xl font-bold text-white">AD</span>
                   </div>
-
-                  {/* Mock data visualization */}
-                  <div className="space-y-4">
-                    {[
-                      { label: "Monthly Sales", value: "$2.4M", width: "w-3/4" },
-                      { label: "Inventory Turnover", value: "18 days", width: "w-5/6" },
-                      { label: "Customer Satisfaction", value: "98%", width: "w-full" },
-                    ].map((stat, index) => (
-                      <div key={index} className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">
-                            {stat.label}
-                          </span>
-                          <span className="font-semibold">{stat.value}</span>
-                        </div>
-                        <div className="w-full bg-secondary rounded-full h-2">
-                          <div
-                            className={`${
-                              index === 0
-                                ? "bg-primary"
-                                : index === 1
-                                ? "bg-green-500"
-                                : "bg-orange-500"
-                            } h-2 rounded-full ${stat.width}`}
-                          ></div>
-                        </div>
-                      </div>
-                    ))}
+                  <div>
+                    <h3 className="font-queen text-2xl font-bold">Albert Deilami</h3>
+                    <p className="text-muted-foreground">Founder & Chief Technology Officer</p>
                   </div>
+                </div>
 
-                  {/* Mock recent activity */}
-                  <div className="space-y-3">
-                    <h4 className="font-medium text-sm text-muted-foreground">
-                      Recent Activity
-                    </h4>
-                    <div className="space-y-2">
-                      {[
-                        {
-                          icon: Car,
-                          title: "2024 Model S sold",
-                          time: "2 minutes ago",
-                          color: "text-blue-500",
-                          bgColor: "bg-blue-500/10",
-                        },
-                        {
-                          icon: Users,
-                          title: "New customer registered",
-                          time: "5 minutes ago",
-                          color: "text-green-500",
-                          bgColor: "bg-green-500/10",
-                        },
-                      ].map((activity, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center space-x-3"
-                          data-testid={`activity-${index}`}
-                        >
-                          <div
-                            className={`w-8 h-8 ${activity.bgColor} rounded-full flex items-center justify-center`}
-                          >
-                            <activity.icon
-                              className={`w-4 h-4 ${activity.color}`}
-                            />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">
-                              {activity.title}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              {activity.time}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                <div className="space-y-4 text-sm">
+                  <div className="space-y-2">
+                    <h4 className="font-semibold">The Authentic Story:</h4>
+                    <ul className="space-y-1 text-muted-foreground">
+                      <li>• 12+ years automotive software development</li>
+                      <li>• Former NASA physicist partnerships</li>
+                      <li>• DealerClick serving dealers since 1989</li>
+                      <li>• DealerClick 2.0: 5 years perfecting</li>
+                      <li>• Now building Cargram social platform</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-secondary/50 rounded-xl p-4">
+                    <h4 className="font-semibold mb-2">The Vision:</h4>
+                    <p className="text-muted-foreground text-xs">
+                      "Your customers don't just buy cars - they live car life. 
+                      I'm connecting both sides of the automotive world."
+                    </p>
                   </div>
                 </div>
               </div>
