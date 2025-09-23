@@ -1,4 +1,3 @@
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -33,15 +32,20 @@
 }
 
 .dark {
-  --background: hsl(0 0% 5%);        /* Very dark background */
-  --foreground: hsl(0 0% 98%);       /* White text */
-  --card: hsl(0 0% 8%);              /* Dark card background */
-  --card-foreground: hsl(0 0% 98%);  /* White card text */
+  --background: hsl(0 0% 5%);
+  /* Very dark background */
+  --foreground: hsl(0 0% 98%);
+  /* White text */
+  --card: hsl(0 0% 8%);
+  /* Dark card background */
+  --card-foreground: hsl(0 0% 98%);
+  /* White card text */
   --popover: hsl(0 0% 8%);
   --popover-foreground: hsl(0 0% 98%);
   --primary: hsl(214 100% 59%);
   --primary-foreground: hsl(0 0% 98%);
-  --secondary: hsl(0 0% 12%);        /* Dark secondary */
+  --secondary: hsl(0 0% 12%);
+  /* Dark secondary */
   --secondary-foreground: hsl(0 0% 98%);
   --muted: hsl(0 0% 12%);
   --muted-foreground: hsl(0 0% 70%);
@@ -49,9 +53,12 @@
   --accent-foreground: hsl(0 0% 98%);
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(0 0% 20%);           /* Dark borders */
-  --input: hsl(0 0% 10%);            /* Dark inputs */
-  --ring: hsl(0 0% 80%);             /* Light ring */
+  --border: hsl(0 0% 20%);
+  /* Dark borders */
+  --input: hsl(0 0% 10%);
+  /* Dark inputs */
+  --ring: hsl(0 0% 80%);
+  /* Light ring */
 
   /* Custom automotive colors for dark mode */
   --automotive-blue: hsl(214 100% 59%);
@@ -90,6 +97,8 @@
   border: 1px solid hsl(var(--border));
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   transition: all 0.2s ease;
+  color: hsl(var(--card-foreground));
+  background: hsl(var(--card) / 0.95);
 }
 
 .capsule-btn:hover {
@@ -109,13 +118,14 @@
 .dark .glassmorphism {
   background: hsl(var(--card) / 0.95);
   border: 1px solid hsl(var(--border));
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);  /* Light shadow */
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  /* Light shadow */
   color: hsl(var(--card-foreground));
 }
 
 /* Header glassmorphism */
 .header-glassmorphism {
-  background: hsl(var(--background) / 0.85);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid hsl(var(--border));
@@ -124,9 +134,10 @@
 }
 
 .dark .header-glassmorphism {
-  background: hsl(var(--background) / 0.90);
+  background: rgba(0, 0, 0, 0.02);
   border-bottom: 1px solid hsl(var(--border));
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);  /* Light shadow */
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);
+  /* Light shadow */
   color: hsl(var(--foreground));
 }
 
@@ -136,7 +147,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: #3b82f6; /* Fallback */
+  color: #3b82f6;
+  /* Fallback */
 }
 
 /* Hero gradient background */
@@ -150,8 +162,15 @@
 
 /* Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .float-animation {
@@ -163,6 +182,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -183,6 +203,10 @@
   color: hsl(var(--foreground));
   min-height: 44px;
 }
+
+
+
+
 
 @media (max-width: 768px) {
   .form-input {
@@ -211,7 +235,8 @@
 
 .dark .card-soft-shadow {
   background: hsl(var(--card));
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);  /* Light shadow */
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  /* Light shadow */
   border: 1px solid hsl(var(--border));
   color: hsl(var(--card-foreground));
 }
@@ -224,5 +249,3 @@
 .hover-scale:hover {
   transform: scale(1.05);
 }
-
-
