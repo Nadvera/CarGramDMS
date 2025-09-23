@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { insertEmailSubscriptionSchema, type InsertEmailSubscription } from "@shared/schema";
+import DealerSignupForm from "@/components/dealer-signup-form";
 import {
   Car,
   Zap,
@@ -563,6 +564,22 @@ export default function Landing() {
               </a>
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Dealer Signup Section */}
+      <section className={`py-16 ${theme === 'dark' ? 'bg-gray-800' : 'bg-secondary/30'}`} data-testid="dealer-signup-section">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className={`font-queen text-4xl lg:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>
+              Ready to Get Started?
+            </h2>
+            <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'} max-w-3xl mx-auto`}>
+              Join hundreds of dealers already using Cargram Pro to move more metal with less hassle.
+              Get your personalized demo today.
+            </p>
+          </div>
+          <DealerSignupForm theme={theme} />
         </div>
       </section>
 
