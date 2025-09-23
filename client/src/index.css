@@ -124,12 +124,12 @@
 }
 
 /* Select dropdown fix - make content fully opaque */
-[data-radix-select-content] {
+.select-content {
   background: hsl(var(--popover)) !important;
   backdrop-filter: none !important;
 }
 
-.dark [data-radix-select-content] {
+.dark .select-content {
   background: hsl(var(--popover)) !important;
   backdrop-filter: none !important;
 }
