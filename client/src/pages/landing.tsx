@@ -36,6 +36,7 @@ import {
   Phone,
   Info,
   Send,
+  MapPin,
 } from "lucide-react";
 
 export default function Landing() {
@@ -141,9 +142,9 @@ export default function Landing() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-3" data-testid="logo">
-              <img 
-                src={theme === 'dark' ? '/images/logo-label-cursive-darkmode.png' : '/images/logo-label-cursive.png'} 
-                alt="Cargram Logo" 
+              <img
+                src={theme === 'dark' ? '/images/logo-label-cursive-darkmode.png' : '/images/logo-label-cursive.png'}
+                alt="Cargram Logo"
                 className="h-8 w-auto"
               />
             </div>
@@ -292,9 +293,9 @@ export default function Landing() {
                     </div>
                   </div>
                   <div className="w-full max-w-2xl">
-                    <img 
-                      src="/images/homeHero.webp" 
-                      alt="DealerClick DMS Dashboard" 
+                    <img
+                      src="/images/homeHero.webp"
+                      alt="DealerClick DMS Dashboard"
                       className="w-full h-auto rounded-b-xl"
                     />
                   </div>
@@ -380,7 +381,7 @@ export default function Landing() {
               Cargram DMS - Built Different
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The mobile-first DMS that closes deals on the lot, not just in the office. 
+              The mobile-first DMS that closes deals on the lot, not just in the office.
               Years of automotive software expertise, serving dealers nationwide.
             </p>
           </div>
@@ -464,7 +465,7 @@ export default function Landing() {
                 Coming Soon: Cargram Social
               </h2>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                The DMS guy who actually gets car culture is building social too. 
+                The DMS guy who actually gets car culture is building social too.
                 Where proven business software meets automotive passion - connecting both sides of the car world.
               </p>
               <div className="inline-flex items-center space-x-2 bg-orange-500/10 rounded-full px-4 py-2">
@@ -521,7 +522,7 @@ export default function Landing() {
             <div className="glassmorphism rounded-2xl p-8 space-y-4">
               <h3 className="font-semibold text-xl">The Integration Vision</h3>
               <p className="text-muted-foreground text-lg">
-                From lot management to community building - Albert's got both covered. 
+                From lot management to community building - Albert's got both covered.
                 Your customers don't just buy cars, they live car life. Soon, you'll connect both sides of your business.
               </p>
               <Button
@@ -566,7 +567,7 @@ export default function Landing() {
                       <h4 className="font-semibold">Cephas Maqowr</h4>
                       <p className="text-sm text-muted-foreground mb-3">Verified Cargram Customer</p>
                       <p className="text-muted-foreground italic">
-                        "The team went above and beyond on a Friday evening when our internet went down... 
+                        "The team went above and beyond on a Friday evening when our internet went down...
                         the extra effort means the difference between making it and not being open"
                       </p>
                     </div>
@@ -582,7 +583,7 @@ export default function Landing() {
                       <h4 className="font-semibold">CMJ Motors</h4>
                       <p className="text-sm text-muted-foreground mb-3">Verified Cargram Customer</p>
                       <p className="text-muted-foreground italic">
-                        "The entire Cargram team... true professionals who consistently 
+                        "The entire Cargram team... true professionals who consistently
                         monitor and update their system to topple the competition"
                       </p>
                     </div>
@@ -673,7 +674,7 @@ export default function Landing() {
                   <div className="bg-secondary/50 rounded-xl p-4">
                     <h4 className="font-semibold mb-2">Our Vision:</h4>
                     <p className="text-muted-foreground text-xs">
-                      "Your customers don't just buy cars - they live car life. 
+                      "Your customers don't just buy cars - they live car life.
                       We're connecting both sides of the automotive world."
                     </p>
                   </div>
