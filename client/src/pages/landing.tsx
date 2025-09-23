@@ -234,11 +234,11 @@ export default function Landing() {
               <div className="space-y-4">
                 <h1 className="font-queen text-5xl lg:text-7xl font-bold leading-tight text-white">
                   Built by
-                  <span className="font-instagram block text-transparent bg-gradient-to-r from-blue-300 to-orange-300 bg-clip-text">
+                  <span className="font-instagram block text-transparent bg-gradient-to-r from-blue-200 to-orange-200 bg-clip-text">
                     Albert Deilami
                   </span>
                 </h1>
-                <p className="text-xl lg:text-2xl text-blue-100 max-w-lg font-medium">
+                <p className="text-xl lg:text-2xl text-blue-50 max-w-lg font-medium">
                   12 Years Under the Hood. From DealerClick DMS that moves metal to Cargram social where car culture lives.
                 </p>
               </div>
