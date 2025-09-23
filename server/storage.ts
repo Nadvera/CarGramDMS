@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription } from "@shared/schema";
+import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type DealerSignup, type InsertDealerSignup } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -8,54 +8,53 @@ export interface IStorage {
   getEmailSubscriptionByEmail(email: string): Promise<EmailSubscription | undefined>;
   createEmailSubscription(subscription: InsertEmailSubscription): Promise<EmailSubscription>;
   getSubscriptionStats(): Promise<{ totalSubscriptions: number; activeSubscriptions: number }>;
+  createDealerSignup(signup: InsertDealerSignup): Promise<DealerSignup>;
+  getAllDealerSignups(): Promise<DealerSignup[]>;
+  getDealerSignup(id: string): Promise<DealerSignup | undefined>;
+  updateDealerSignupStatus(id: string, status: string, notes?: string): Promise<DealerSignup | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private emailSubscriptions: Map<string, EmailSubscription>;
+import { users, emailSubscriptions, dealerSignups } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
-  constructor() {
-    this.users = new Map();
-    this.emailSubscriptions = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async getEmailSubscriptionByEmail(email: string): Promise<EmailSubscription | undefined> {
-    return Array.from(this.emailSubscriptions.values()).find(
-      (subscription) => subscription.email === email,
-    );
+    const [subscription] = await db
+      .select()
+      .from(emailSubscriptions)
+      .where(eq(emailSubscriptions.email, email));
+    return subscription || undefined;
   }
 
   async createEmailSubscription(insertSubscription: InsertEmailSubscription): Promise<EmailSubscription> {
-    const id = randomUUID();
-    const subscription: EmailSubscription = {
-      id,
-      email: insertSubscription.email,
-      subscribedAt: new Date(),
-      isActive: "true",
-    };
-    this.emailSubscriptions.set(id, subscription);
+    const [subscription] = await db
+      .insert(emailSubscriptions)
+      .values(insertSubscription)
+      .returning();
     return subscription;
   }
 
   async getSubscriptionStats(): Promise<{ totalSubscriptions: number; activeSubscriptions: number }> {
-    const allSubscriptions = Array.from(this.emailSubscriptions.values());
+    const allSubscriptions = await db.select().from(emailSubscriptions);
     const activeSubscriptions = allSubscriptions.filter(sub => sub.isActive === "true");
     
     return {
@@ -63,6 +62,40 @@ export class MemStorage implements IStorage {
       activeSubscriptions: activeSubscriptions.length,
     };
   }
+
+  async createDealerSignup(insertSignup: InsertDealerSignup): Promise<DealerSignup> {
+    const [signup] = await db
+      .insert(dealerSignups)
+      .values(insertSignup)
+      .returning();
+    return signup;
+  }
+
+  async getAllDealerSignups(): Promise<DealerSignup[]> {
+    return await db.select().from(dealerSignups);
+  }
+
+  async getDealerSignup(id: string): Promise<DealerSignup | undefined> {
+    const [signup] = await db
+      .select()
+      .from(dealerSignups)
+      .where(eq(dealerSignups.id, id));
+    return signup || undefined;
+  }
+
+  async updateDealerSignupStatus(id: string, status: string, notes?: string): Promise<DealerSignup | undefined> {
+    const updateData: any = { status };
+    if (notes !== undefined) {
+      updateData.notes = notes;
+    }
+
+    const [signup] = await db
+      .update(dealerSignups)
+      .set(updateData)
+      .where(eq(dealerSignups.id, id))
+      .returning();
+    return signup || undefined;
+  }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
