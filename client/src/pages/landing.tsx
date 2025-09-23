@@ -478,9 +478,9 @@ export default function Landing() {
 
             {/* Phone iframe */}
             <div className="flex justify-center my-12">
-              <div className="w-80 h-[600px] bg-black rounded-[25px] p-2 shadow-2xl">
+              <div className="w-96 h-[800px] bg-black rounded-[30px] p-3 shadow-2xl">
                 <a href="https://cargram.app" target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                  <div className="w-full h-full bg-white rounded-[20px] overflow-hidden">
+                  <div className="w-full h-full bg-white rounded-[25px] overflow-hidden relative">
                     <iframe
                       src="https://cargram.app"
                       className="w-full h-full"
@@ -489,12 +489,12 @@ export default function Landing() {
                       title="Cargram App Preview"
                     />
                     {!iframeLoaded && !iframeError && (
-                      <div className="absolute inset-0 bg-gray-200 rounded-[20px] flex items-center justify-center">
+                      <div className="absolute inset-0 bg-gray-200 rounded-[25px] flex items-center justify-center">
                         <div className="text-gray-500">Loading Cargram...</div>
                       </div>
                     )}
                     {iframeError && (
-                      <div className="absolute inset-0 bg-gray-100 rounded-[20px] flex items-center justify-center">
+                      <div className="absolute inset-0 bg-gray-100 rounded-[25px] flex items-center justify-center">
                         <div className="text-center text-gray-600">
                           <div className="mb-2">Preview unavailable</div>
                           <div className="text-sm">Click to visit Cargram</div>
