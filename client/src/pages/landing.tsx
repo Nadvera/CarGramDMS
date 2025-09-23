@@ -817,9 +817,10 @@ export default function Landing() {
                   {section.links.map((link, linkIndex) => (
                     <a
                       key={linkIndex}
-                      href="#"
+                      href={link === "Privacy Policy" ? "https://cargram.app/privacy" : "#"}
                       className="block text-muted-foreground hover:text-foreground transition-colors"
                       data-testid={`footer-link-${link.toLowerCase().replace(' ', '-')}`}
+                      {...(link === "Privacy Policy" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
                       {link}
                     </a>
