@@ -17,29 +17,24 @@ import {
 import { insertEmailSubscriptionSchema, type InsertEmailSubscription } from "@shared/schema";
 import {
   Car,
-  Sun,
-  Moon,
-  Rocket,
-  Mail,
-  Users,
-  Calendar,
-  MapPin,
-  Heart,
-  Share2,
-  Camera,
-  TrendingUp,
-  ShieldCheck,
   Zap,
-  Handshake,
+  Users,
+  Smartphone,
+  ShieldCheck,
+  TrendingUp,
+  Building,
+  Camera,
+  Heart,
+  Calendar,
   Target,
   Clock,
-  Building,
-  Headphones,
-  Phone,
-  Info,
   Instagram,
   Twitter,
   Facebook,
+  Sun,
+  Moon,
+  Phone,
+  Info,
   Send,
 } from "lucide-react";
 
@@ -401,11 +396,11 @@ export default function Landing() {
                 gradient: "from-yellow-500 to-orange-500",
               },
               {
-                icon: Users,
+                icon: Smartphone,
                 title: "Fully Mobile Responsive",
                 description:
                   "DMS that works in the lot, not just the office. Manage inventory, customers, and sales from anywhere.",
-                gradient: "from-primary to-blue-600",
+                gradient: "from-pink-500 to-purple-500 via-gold-500",
               },
               {
                 icon: ShieldCheck,
@@ -674,7 +669,7 @@ export default function Landing() {
                       <li>• Connecting business + car culture</li>
                     </ul>
                   </div>
-                  
+
                   <div className="bg-secondary/50 rounded-xl p-4">
                     <h4 className="font-semibold mb-2">Our Vision:</h4>
                     <p className="text-muted-foreground text-xs">
