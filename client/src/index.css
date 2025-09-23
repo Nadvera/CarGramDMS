@@ -34,23 +34,29 @@
 .dark {
   --background: hsl(222 47% 11%);
   --foreground: hsl(213 31% 91%);
-  --card: hsl(222 47% 11%);
+  --card: hsl(222 47% 13%);
   --card-foreground: hsl(213 31% 91%);
   --popover: hsl(224 71% 4%);
   --popover-foreground: hsl(215.4 16.3% 65.1%);
   --primary: hsl(214 100% 59%);
-  --primary-foreground: hsl(222 47% 11%);
-  --secondary: hsl(222 47% 11%);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(222 47% 15%);
   --secondary-foreground: hsl(213 31% 91%);
-  --muted: hsl(223 47% 11%);
-  --muted-foreground: hsl(215.4 16.3% 56.9%);
+  --muted: hsl(223 47% 15%);
+  --muted-foreground: hsl(215.4 16.3% 65%);
   --accent: hsl(216 34% 17%);
   --accent-foreground: hsl(210 40% 98%);
   --destructive: hsl(0 63% 31%);
   --destructive-foreground: hsl(210 40% 98%);
-  --border: hsl(216 34% 17%);
+  --border: hsl(216 34% 20%);
   --input: hsl(216 34% 17%);
   --ring: hsl(216 34% 17%);
+
+  /* Custom automotive colors for dark mode */
+  --automotive-blue: hsl(214 100% 59%);
+  --automotive-orange: hsl(24 100% 50%);
+  --automotive-dark: hsl(222 47% 8%);
+  --automotive-gray: hsl(220 13% 25%);
 }
 
 @layer base {
@@ -99,9 +105,9 @@
 }
 
 .dark .glassmorphism {
-  background: rgba(0, 0, 0, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Header glassmorphism - better transparency and backdrop */

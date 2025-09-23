@@ -36,11 +36,11 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = window.document.documentElement;
-    
+
     // Check for saved theme preference or use time-based theme
     const savedTheme = localStorage.getItem("theme") as Theme;
     const isManual = localStorage.getItem("theme-manual") === "true";
-    
+
     if (savedTheme) {
       setTheme(savedTheme);
       setIsManuallySet(isManual);
@@ -49,7 +49,7 @@ export function ThemeProvider({
       setTheme(timeBasedTheme);
       setIsManuallySet(false);
     }
-    
+
     root.classList.remove("light", "dark");
     root.classList.add(savedTheme || getTimeBasedTheme());
   }, []);
