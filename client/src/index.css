@@ -33,30 +33,30 @@
 }
 
 .dark {
-  --background: hsl(222.2 84% 4.9%);
+  --background: hsl(220 13% 8%);
   --foreground: hsl(210 40% 98%);
-  --card: hsl(222.2 84% 4.9%);
+  --card: hsl(220 13% 10%);
   --card-foreground: hsl(210 40% 98%);
-  --popover: hsl(222.2 84% 4.9%);
+  --popover: hsl(220 13% 10%);
   --popover-foreground: hsl(210 40% 98%);
   --primary: hsl(214 100% 59%);
   --primary-foreground: hsl(210 40% 98%);
-  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary: hsl(220 13% 15%);
   --secondary-foreground: hsl(210 40% 98%);
-  --muted: hsl(217.2 32.6% 17.5%);
+  --muted: hsl(220 13% 15%);
   --muted-foreground: hsl(215 20.2% 65.1%);
-  --accent: hsl(217.2 32.6% 17.5%);
+  --accent: hsl(220 13% 15%);
   --accent-foreground: hsl(210 40% 98%);
   --destructive: hsl(0 62.8% 30.6%);
   --destructive-foreground: hsl(210 40% 98%);
-  --border: hsl(217.2 32.6% 17.5%);
-  --input: hsl(217.2 32.6% 17.5%);
+  --border: hsl(220 13% 20%);
+  --input: hsl(220 13% 15%);
   --ring: hsl(212.7 26.8% 83.9%);
 
   /* Custom automotive colors for dark mode */
   --automotive-blue: hsl(214 100% 59%);
   --automotive-orange: hsl(24 100% 50%);
-  --automotive-dark: hsl(222.2 84% 4.9%);
+  --automotive-dark: hsl(220 13% 8%);
   --automotive-gray: hsl(220 13% 25%);
 }
 
@@ -99,7 +99,7 @@
 
 /* Clean cards with soft shadows */
 .glassmorphism {
-  background: hsl(var(--card));
+  background: hsl(var(--card) / 0.95);
   backdrop-filter: blur(10px);
   border: 1px solid hsl(var(--border));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -107,9 +107,9 @@
 }
 
 .dark .glassmorphism {
-  background: hsl(var(--card));
+  background: hsl(var(--card) / 0.95);
   border: 1px solid hsl(var(--border));
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
   color: hsl(var(--card-foreground));
 }
 
@@ -124,9 +124,9 @@
 }
 
 .dark .header-glassmorphism {
-  background: hsl(var(--background) / 0.85);
+  background: hsl(var(--background) / 0.90);
   border-bottom: 1px solid hsl(var(--border));
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
   color: hsl(var(--foreground));
 }
 
@@ -211,7 +211,7 @@
 
 .dark .card-soft-shadow {
   background: hsl(var(--card));
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
   border: 1px solid hsl(var(--border));
   color: hsl(var(--card-foreground));
 }

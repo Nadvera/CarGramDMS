@@ -12,7 +12,7 @@ export class ErrorLogger {
     };
 
     // Always log to console in development
-    if (import.meta.env.MODE === 'development') {
+    if (import.meta.env.DEV) {
       console.group(`🚨 Error ${context ? `(${context})` : ''}`);
       console.error('Error:', error);
       console.table(errorInfo);
