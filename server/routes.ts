@@ -95,38 +95,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin endpoints for dealer signups
-  app.get("/api/admin/dealer-signups", async (req, res) => {
-    try {
-      const signups = await storage.getAllDealerSignups();
-      res.json(signups);
-    } catch (error) {
-      console.error("Error fetching dealer signups:", error);
-      res.status(500).json({ message: "Failed to fetch dealer signups" });
-    }
-  });
-
-  app.put("/api/admin/dealer-signups/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { status, notes } = req.body;
-      
-      if (!status) {
-        return res.status(400).json({ message: "Status is required" });
-      }
-
-      const updatedSignup = await storage.updateDealerSignupStatus(id, status, notes);
-      
-      if (!updatedSignup) {
-        return res.status(404).json({ message: "Dealer signup not found" });
-      }
-
-      res.json(updatedSignup);
-    } catch (error) {
-      console.error("Error updating dealer signup:", error);
-      res.status(500).json({ message: "Failed to update dealer signup" });
-    }
-  });
 
   const httpServer = createServer(app);
   return httpServer;

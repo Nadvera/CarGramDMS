@@ -9,9 +9,6 @@ export interface IStorage {
   createEmailSubscription(subscription: InsertEmailSubscription): Promise<EmailSubscription>;
   getSubscriptionStats(): Promise<{ totalSubscriptions: number; activeSubscriptions: number }>;
   createDealerSignup(signup: InsertDealerSignup): Promise<DealerSignup>;
-  getAllDealerSignups(): Promise<DealerSignup[]>;
-  getDealerSignup(id: string): Promise<DealerSignup | undefined>;
-  updateDealerSignupStatus(id: string, status: string, notes?: string): Promise<DealerSignup | undefined>;
 }
 
 import { users, emailSubscriptions, dealerSignups } from "@shared/schema";
@@ -71,31 +68,6 @@ export class DatabaseStorage implements IStorage {
     return signup;
   }
 
-  async getAllDealerSignups(): Promise<DealerSignup[]> {
-    return await db.select().from(dealerSignups);
-  }
-
-  async getDealerSignup(id: string): Promise<DealerSignup | undefined> {
-    const [signup] = await db
-      .select()
-      .from(dealerSignups)
-      .where(eq(dealerSignups.id, id));
-    return signup || undefined;
-  }
-
-  async updateDealerSignupStatus(id: string, status: string, notes?: string): Promise<DealerSignup | undefined> {
-    const updateData: any = { status };
-    if (notes !== undefined) {
-      updateData.notes = notes;
-    }
-
-    const [signup] = await db
-      .update(dealerSignups)
-      .set(updateData)
-      .where(eq(dealerSignups.id, id))
-      .returning();
-    return signup || undefined;
-  }
 }
 
 export const storage = new DatabaseStorage();
