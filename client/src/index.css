@@ -23,7 +23,7 @@
   --input: hsl(214.3 31.8% 91.4%);
   --ring: hsl(215 20.2% 65.1%);
   --radius: 0.75rem;
-  
+
   /* Custom automotive colors */
   --automotive-blue: hsl(214 100% 59%);
   --automotive-orange: hsl(24 100% 50%);
@@ -37,7 +37,7 @@
   --card: hsl(222 47% 11%);
   --card-foreground: hsl(213 31% 91%);
   --popover: hsl(224 71% 4%);
-  --popover-foreground: hsl(215 20.2% 65.1%);
+  --popover-foreground: hsl(215.4 16.3% 65.1%);
   --primary: hsl(214 100% 59%);
   --primary-foreground: hsl(222 47% 11%);
   --secondary: hsl(222 47% 11%);
@@ -102,6 +102,21 @@
   background: rgba(0, 0, 0, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Header glassmorphism - better transparency and backdrop */
+.header-glassmorphism {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dark .header-glassmorphism {
+  background: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* Gradient text */

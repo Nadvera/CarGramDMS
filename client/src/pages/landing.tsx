@@ -141,17 +141,16 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 glassmorphism">
+      <header className="fixed top-0 left-0 right-0 z-50 header-glassmorphism">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-3" data-testid="logo">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-orange-500 rounded-2xl flex items-center justify-center">
-                <Car className="w-6 h-6 text-white" />
-              </div>
-              <span className="font-instagram text-2xl font-bold gradient-text">
-                Cargram
-              </span>
+              <img 
+                src={theme === 'dark' ? '/images/logo-label-cursive-darkmode.png' : '/images/logo-label-cursive.png'} 
+                alt="Cargram Logo" 
+                className="h-8 w-auto"
+              />
             </div>
 
             {/* Navigation */}
@@ -233,13 +232,13 @@ export default function Landing() {
             {/* Hero Content */}
             <div className="space-y-8 fade-in-up" data-testid="hero-content">
               <div className="space-y-4">
-                <h1 className="font-queen text-5xl lg:text-7xl font-bold leading-tight">
+                <h1 className="font-queen text-5xl lg:text-7xl font-bold leading-tight text-white">
                   Welcome to
-                  <span className="font-instagram gradient-text block">
+                  <span className="font-instagram block text-transparent bg-gradient-to-r from-blue-300 to-orange-300 bg-clip-text">
                     Cargram
                   </span>
                 </h1>
-                <p className="text-xl lg:text-2xl text-blue-100 max-w-lg">
+                <p className="text-xl lg:text-2xl text-blue-100 max-w-lg font-medium">
                   The ultimate automotive community where passion meets
                   technology. Connect, share, and discover with fellow car
                   enthusiasts worldwide.
