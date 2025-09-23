@@ -1,3 +1,4 @@
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -33,21 +34,21 @@
 
 .dark {
   --background: hsl(222 47% 11%);
-  --foreground: hsl(0 0% 98%);
-  --card: hsl(222 47% 13%);
-  --card-foreground: hsl(0 0% 98%);
-  --popover: hsl(224 71% 4%);
-  --popover-foreground: hsl(0 0% 98%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222 47% 11%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222 47% 11%);
+  --popover-foreground: hsl(210 40% 98%);
   --primary: hsl(214 100% 59%);
-  --primary-foreground: hsl(0 0% 98%);
+  --primary-foreground: hsl(210 40% 98%);
   --secondary: hsl(222 47% 15%);
-  --secondary-foreground: hsl(0 0% 98%);
-  --muted: hsl(223 47% 15%);
-  --muted-foreground: hsl(0 0% 85%);
-  --accent: hsl(216 34% 17%);
-  --accent-foreground: hsl(0 0% 98%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(222 47% 15%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(222 47% 15%);
+  --accent-foreground: hsl(210 40% 98%);
   --destructive: hsl(0 63% 31%);
-  --destructive-foreground: hsl(0 0% 98%);
+  --destructive-foreground: hsl(210 40% 98%);
   --border: hsl(216 34% 20%);
   --input: hsl(216 34% 17%);
   --ring: hsl(216 34% 17%);
@@ -98,35 +99,35 @@
 
 /* Clean white/black cards with soft shadows */
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.95);
+  background: hsl(var(--card));
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid hsl(var(--border));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  color: hsl(222.2 84% 4.9%);
+  color: hsl(var(--card-foreground));
 }
 
 .dark .glassmorphism {
-  background: rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  color: hsl(0 0% 98%);
+  color: hsl(var(--card-foreground));
 }
 
 /* Header glassmorphism - better transparency and backdrop */
 .header-glassmorphism {
-  background: rgba(255, 255, 255, 0.85);
+  background: hsl(var(--background) / 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid hsl(var(--border));
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  color: hsl(222.2 84% 4.9%);
+  color: hsl(var(--foreground));
 }
 
 .dark .header-glassmorphism {
-  background: rgba(0, 0, 0, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: hsl(var(--background) / 0.85);
+  border-bottom: 1px solid hsl(var(--border));
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  color: hsl(0 0% 98%);
+  color: hsl(var(--foreground));
 }
 
 /* Gradient text */
@@ -190,20 +191,20 @@
   padding: 0.75rem 1.5rem;
   transition: all 0.2s ease;
   color: hsl(var(--foreground));
-  min-height: 44px; /* Ensure minimum touch target for accessibility */
+  min-height: 44px;
 }
 
 .dark .form-input {
-  background: hsl(var(--card));
-  color: hsl(var(--card-foreground));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
   border-color: hsl(var(--border));
 }
 
 /* Mobile-specific touch target improvements */
 @media (max-width: 768px) {
   .form-input {
-    min-height: 48px; /* Slightly larger on mobile for better touch experience */
-    padding: 0.875rem 1.5rem; /* Increased vertical padding for mobile */
+    min-height: 48px;
+    padding: 0.875rem 1.5rem;
   }
 }
 
@@ -219,17 +220,17 @@
 
 /* Clean white/black cards with soft shadows */
 .card-soft-shadow {
-  background: #ffffff;
+  background: hsl(var(--card));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: hsl(222.2 84% 4.9%);
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--card-foreground));
 }
 
 .dark .card-soft-shadow {
-  background: #000000;
+  background: hsl(var(--card));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: hsl(0 0% 98%);
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--card-foreground));
 }
 
 /* Hover effects for interactive elements */
