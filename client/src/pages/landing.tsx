@@ -233,13 +233,13 @@ export default function Landing() {
             <div className="space-y-8 fade-in-up" data-testid="hero-content">
               <div className="space-y-4">
                 <h1 className="font-queen text-5xl lg:text-7xl font-bold leading-tight text-white">
-                  Built by
+                  Where Business Meets
                   <span className="font-instagram block text-transparent bg-gradient-to-r from-blue-200 to-orange-200 bg-clip-text">
-                    Albert Deilami
+                    Car Culture
                   </span>
                 </h1>
                 <p className="text-xl lg:text-2xl text-blue-50 max-w-lg font-medium">
-                  12 Years Under the Hood. From DealerClick DMS that moves metal to Cargram social where car culture lives.
+                  Professional DMS that moves metal + Social platform where car culture lives. Two sides of the automotive world, one vision.
                 </p>
               </div>
 
@@ -268,7 +268,7 @@ export default function Landing() {
                   data-testid="demo-dms-button"
                 >
                   <Zap className="w-5 h-5" />
-                  Demo DealerClick DMS
+                  Demo Cargram DMS
                 </Button>
                 <Button
                   onClick={scrollToForm}
@@ -293,7 +293,7 @@ export default function Landing() {
                     <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     <div className="flex-1 bg-gray-700 rounded px-3 py-1 text-gray-300 text-sm text-center">
-                      DealerClick DMS - Lightning Fast
+                      Cargram DMS - Lightning Fast
                     </div>
                   </div>
                   <div className="w-full max-w-2xl">
@@ -382,11 +382,11 @@ export default function Landing() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-queen text-4xl lg:text-5xl font-bold mb-6">
-              DealerClick DMS - Built Different
+              Cargram DMS - Built Different
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               The mobile-first DMS that closes deals on the lot, not just in the office. 
-              5 years perfecting the platform, hundreds of dealers coast to coast.
+              Years of automotive software expertise, serving dealers nationwide.
             </p>
           </div>
 
@@ -556,7 +556,7 @@ export default function Landing() {
                   Proven Success Stories
                 </h2>
                 <p className="text-xl text-muted-foreground">
-                  Real dealers, real results. Albert and the DealerClick team have been moving metal and solving problems for dealers nationwide since the beginning.
+                  Real dealers, real results. Our team has been moving metal and solving problems for dealers nationwide for years.
                 </p>
               </div>
 
@@ -569,9 +569,9 @@ export default function Landing() {
                     </div>
                     <div className="flex-1">
                       <h4 className="font-semibold">Cephas Maqowr</h4>
-                      <p className="text-sm text-muted-foreground mb-3">Verified DealerClick Customer</p>
+                      <p className="text-sm text-muted-foreground mb-3">Verified Cargram Customer</p>
                       <p className="text-muted-foreground italic">
-                        "Albert went above and beyond on a Friday evening when our internet went down... 
+                        "The team went above and beyond on a Friday evening when our internet went down... 
                         the extra effort means the difference between making it and not being open"
                       </p>
                     </div>
@@ -585,9 +585,9 @@ export default function Landing() {
                     </div>
                     <div className="flex-1">
                       <h4 className="font-semibold">CMJ Motors</h4>
-                      <p className="text-sm text-muted-foreground mb-3">Verified DealerClick Customer</p>
+                      <p className="text-sm text-muted-foreground mb-3">Verified Cargram Customer</p>
                       <p className="text-muted-foreground italic">
-                        "Calvin, Albert, and the entire team... true professionals who consistently 
+                        "The entire Cargram team... true professionals who consistently 
                         monitor and update their system to topple the competition"
                       </p>
                     </div>
@@ -636,7 +636,7 @@ export default function Landing() {
                   data-testid="contact-sales-button"
                 >
                   <Phone className="w-5 h-5" />
-                  Get DealerClick Demo
+                  Get Cargram Demo
                 </Button>
                 <Button
                   variant="secondary"
@@ -650,36 +650,36 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Albert's Story */}
+            {/* Company Focus */}
             <div className="flex justify-center" data-testid="support-visual">
               <div className="glassmorphism rounded-3xl p-8 w-full max-w-md space-y-6">
                 <div className="text-center space-y-4">
                   <div className="w-20 h-20 bg-gradient-to-br from-primary to-orange-500 rounded-2xl flex items-center justify-center mx-auto">
-                    <span className="text-2xl font-bold text-white">AD</span>
+                    <Car className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-queen text-2xl font-bold">Albert Deilami</h3>
-                    <p className="text-muted-foreground">Founder & Chief Technology Officer</p>
+                    <h3 className="font-queen text-2xl font-bold">Cargram</h3>
+                    <p className="text-muted-foreground">Automotive Software & Community</p>
                   </div>
                 </div>
 
                 <div className="space-y-4 text-sm">
                   <div className="space-y-2">
-                    <h4 className="font-semibold">The Authentic Story:</h4>
+                    <h4 className="font-semibold">What We Do:</h4>
                     <ul className="space-y-1 text-muted-foreground">
-                      <li>• 12+ years automotive software development</li>
-                      <li>• Former NASA physicist partnerships</li>
-                      <li>• DealerClick serving dealers since 1989</li>
-                      <li>• DealerClick 2.0: 5 years perfecting</li>
-                      <li>• Now building Cargram social platform</li>
+                      <li>• Professional DMS for dealerships</li>
+                      <li>• Mobile-first, lightning fast</li>
+                      <li>• Complete integrations ecosystem</li>
+                      <li>• Social automotive marketplace</li>
+                      <li>• Connecting business + car culture</li>
                     </ul>
                   </div>
                   
                   <div className="bg-secondary/50 rounded-xl p-4">
-                    <h4 className="font-semibold mb-2">The Vision:</h4>
+                    <h4 className="font-semibold mb-2">Our Vision:</h4>
                     <p className="text-muted-foreground text-xs">
                       "Your customers don't just buy cars - they live car life. 
-                      I'm connecting both sides of the automotive world."
+                      We're connecting both sides of the automotive world."
                     </p>
                   </div>
                 </div>
