@@ -679,7 +679,7 @@ export default function Landing() {
                 <Button
                   variant="secondary"
                   size="xl"
-                  className={`capsule-btn ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600' : ''}`}
+                  className={`capsule-btn ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'text-gray-900'}`}
                   data-testid="learn-more-button"
                 >
                   <Info className="w-5 h-5" />
@@ -696,7 +696,11 @@ export default function Landing() {
                     <Car className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className={`font-queen text-2xl font-bold ${theme === 'dark' ? 'text-white' : ''}`}>Cargram</h3>
+                    <img
+                      src={theme === 'dark' ? '/images/logo-label-cursive-darkmode.png' : '/images/logo-label-cursive.png'}
+                      alt="Cargram Logo"
+                      className="h-8 w-auto mx-auto"
+                    />
                     <p className={theme === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}>Automotive Software & Community</p>
                   </div>
                 </div>
@@ -738,12 +742,11 @@ export default function Landing() {
                   <Car className="w-6 h-6 text-white" />
                 </div>
                 <span className={`font-instagram text-2xl font-bold gradient-text ${theme === 'dark' ? 'text-white' : ''}`}>
-                  Cargram
+                  Cargram™
                 </span>
               </div>
               <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'}`}>
-                The premier automotive community platform. Built by enthusiasts,
-                for enthusiasts.
+                Built by enthusiasts, for enthusiasts.
               </p>
               <div className="flex space-x-4">
                 {[
@@ -769,16 +772,12 @@ export default function Landing() {
             {/* Footer Links */}
             {[
               {
-                title: "Platform",
-                links: ["Features", "Community", "Mobile App", "API"],
-              },
-              {
                 title: "Company",
-                links: ["About Us", "Careers", "Contact", "Press"],
+                links: ["Careers", "Contact"],
               },
               {
                 title: "Legal",
-                links: ["Privacy Policy", "Terms of Service", "Status"],
+                links: ["Privacy Policy", "Terms of Service"],
               },
             ].map((section, index) => (
               <div key={index} className="space-y-4" data-testid={`footer-section-${index}`}>
