@@ -599,7 +599,7 @@ export default function Landing() {
 
               {/* Real Testimonials */}
               <div className="space-y-6">
-                <div className={`glassmorphism rounded-2xl p-6 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
+                <div className={`glassmorphism orange-glow-subtle rounded-2xl p-6 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
                   <div className="flex items-start space-x-3">
                     <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
                       <Users className="w-5 h-5 text-white" />
@@ -615,7 +615,7 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <div className={`glassmorphism rounded-2xl p-6 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
+                <div className={`glassmorphism orange-glow-subtle rounded-2xl p-6 space-y-4 ${theme === 'dark' ? 'bg-gray-800 shadow-lg' : ''}`}>
                   <div className="flex items-start space-x-3">
                     <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
                       <Building className="w-5 h-5 text-white" />
@@ -792,8 +792,8 @@ export default function Landing() {
                     <a
                       key={linkIndex}
                       href={
-                        link === "Privacy Policy" 
-                          ? "https://cargram.app/privacy" 
+                        link === "Privacy Policy"
+                          ? "https://cargram.app/privacy"
                           : link === "Contact"
                           ? "#support"
                           : link === "Careers"
@@ -805,7 +805,7 @@ export default function Landing() {
                       className={`block transition-colors ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}
                       data-testid={`footer-link-${link.toLowerCase().replace(' ', '-')}`}
                       {...((link === "Privacy Policy" || link === "Terms of Service") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      {...(link === "Contact" || link === "Careers" ? { 
+                      {...(link === "Contact" || link === "Careers" ? {
                         onClick: (e: React.MouseEvent) => {
                           e.preventDefault();
                           scrollToSection(link === "Contact" ? "support" : "dealer-signup");

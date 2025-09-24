@@ -295,3 +295,87 @@
   font-weight: 700;
   letter-spacing: 0.5px;
 }
+
+/* Orange glow effects for cards and CTA buttons */
+.orange-glow-card {
+  position: relative;
+  border: 1px solid rgba(251, 146, 60, 0.3);
+  box-shadow: 
+    0 4px 20px rgba(251, 146, 60, 0.15),
+    inset 0 1px 0 rgba(251, 146, 60, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.orange-glow-card:hover {
+  border-color: rgba(251, 146, 60, 0.5);
+  box-shadow: 
+    0 8px 32px rgba(251, 146, 60, 0.25),
+    0 0 40px rgba(251, 146, 60, 0.2),
+    inset 0 1px 0 rgba(251, 146, 60, 0.2);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.orange-glow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(251, 146, 60, 0.05) 0%, 
+    rgba(251, 146, 60, 0.02) 50%, 
+    rgba(251, 146, 60, 0.05) 100%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.orange-glow-card:hover::before {
+  opacity: 1;
+}
+
+/* CTA Button Orange Glow */
+.cta-orange-glow {
+  position: relative;
+  background: linear-gradient(135deg, #fb923c, #f97316);
+  border: 2px solid rgba(251, 146, 60, 0.6);
+  box-shadow: 
+    0 4px 16px rgba(251, 146, 60, 0.3),
+    0 0 24px rgba(251, 146, 60, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-orange-glow:hover {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-color: rgba(251, 146, 60, 0.8);
+  box-shadow: 
+    0 8px 24px rgba(251, 146, 60, 0.4),
+    0 0 40px rgba(251, 146, 60, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px) scale(1.05);
+}
+
+.cta-orange-glow:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 
+    0 2px 8px rgba(251, 146, 60, 0.3),
+    0 0 20px rgba(251, 146, 60, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Subtle orange glow for secondary elements */
+.orange-glow-subtle {
+  border: 1px solid rgba(251, 146, 60, 0.2);
+  box-shadow: 0 2px 8px rgba(251, 146, 60, 0.1);
+  transition: all 0.3s ease;
+}
+
+.orange-glow-subtle:hover {
+  border-color: rgba(251, 146, 60, 0.4);
+  box-shadow: 
+    0 4px 16px rgba(251, 146, 60, 0.2),
+    0 0 20px rgba(251, 146, 60, 0.1);
+}
