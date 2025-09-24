@@ -16,6 +16,15 @@ export const emailSubscriptions = pgTable("email_subscriptions", {
   isActive: varchar("is_active").default("true").notNull(),
 });
 
+export const salesAgents = pgTable("sales_agents", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  email: text("email").notNull().unique(),
+  isActive: varchar("is_active").default("true").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const dealerSignups = pgTable("dealer_signups", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   dealershipName: text("dealership_name").notNull(),
@@ -30,7 +39,7 @@ export const dealerSignups = pgTable("dealer_signups", {
   monthlyInventory: text("monthly_inventory").notNull(),
   currentSoftware: text("current_software"),
   interestedFeatures: text("interested_features").array(),
-  salesAgent: text("sales_agent"),
+  salesAgentId: varchar("sales_agent_id"),
   signupAt: timestamp("signup_at").defaultNow().notNull(),
   status: varchar("status").default("pending").notNull(),
   notes: text("notes"),
@@ -47,6 +56,16 @@ export const insertEmailSubscriptionSchema = createInsertSchema(emailSubscriptio
   email: z.string().email("Please enter a valid email address"),
 });
 
+export const insertSalesAgentSchema = createInsertSchema(salesAgents).pick({
+  firstName: true,
+  lastName: true,
+  email: true,
+}).extend({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.string().email("Please enter a valid email address"),
+});
+
 export const insertDealerSignupSchema = createInsertSchema(dealerSignups).pick({
   dealershipName: true,
   contactName: true,
@@ -60,7 +79,7 @@ export const insertDealerSignupSchema = createInsertSchema(dealerSignups).pick({
   monthlyInventory: true,
   currentSoftware: true,
   interestedFeatures: true,
-  salesAgent: true,
+  salesAgentId: true,
 }).extend({
   dealershipName: z.string().min(1, "Dealership name is required"),
   contactName: z.string().min(1, "Contact name is required"),
@@ -74,12 +93,14 @@ export const insertDealerSignupSchema = createInsertSchema(dealerSignups).pick({
   monthlyInventory: z.string().min(1, "Monthly inventory is required"),
   currentSoftware: z.string().optional(),
   interestedFeatures: z.array(z.string()).default([]),
-  salesAgent: z.string().optional(),
+  salesAgentId: z.string().optional(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertEmailSubscription = z.infer<typeof insertEmailSubscriptionSchema>;
 export type EmailSubscription = typeof emailSubscriptions.$inferSelect;
+export type InsertSalesAgent = z.infer<typeof insertSalesAgentSchema>;
+export type SalesAgent = typeof salesAgents.$inferSelect;
 export type InsertDealerSignup = z.infer<typeof insertDealerSignupSchema>;
 export type DealerSignup = typeof dealerSignups.$inferSelect;

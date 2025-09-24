@@ -2,7 +2,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { insertDealerSignupSchema, type InsertDealerSignup } from "@shared/schema";
@@ -29,6 +29,17 @@ interface DealerSignupFormProps {
 export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
   const { toast } = useToast();
 
+  // Fetch sales agents
+  const { data: salesAgentsData, isLoading: isLoadingSalesAgents } = useQuery({
+    queryKey: ["sales-agents"],
+    queryFn: async () => {
+      const response = await apiRequest("GET", "/api/sales-agents");
+      return response.json();
+    },
+  });
+
+  const salesAgents = salesAgentsData?.agents || [];
+
   const form = useForm<InsertDealerSignup>({
     resolver: zodResolver(insertDealerSignupSchema),
     defaultValues: {
@@ -44,7 +55,7 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
       monthlyInventory: "",
       currentSoftware: "",
       interestedFeatures: [],
-      salesAgent: "",
+      salesAgentId: "",
     },
   });
 
@@ -351,7 +362,7 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
               />
               <FormField
                 control={form.control}
-                name="salesAgent"
+                name="salesAgentId"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className={theme === 'dark' ? 'text-gray-300' : ''}>
@@ -360,15 +371,15 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger className={theme === 'dark' ? 'bg-gray-700 border-gray-600 text-white' : ''}>
-                          <SelectValue placeholder="Select a sales agent" />
+                          <SelectValue placeholder={isLoadingSalesAgents ? "Loading agents..." : "Select a sales agent"} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="select-content">
-                        <SelectItem value="alex-rodriguez">Alex Rodriguez</SelectItem>
-                        <SelectItem value="sarah-johnson">Sarah Johnson</SelectItem>
-                        <SelectItem value="mike-chen">Mike Chen</SelectItem>
-                        <SelectItem value="jessica-williams">Jessica Williams</SelectItem>
-                        <SelectItem value="david-thompson">David Thompson</SelectItem>
+                        {salesAgents.map((agent: any) => (
+                          <SelectItem key={agent.id} value={agent.id}>
+                            {agent.first_name} {agent.last_name}
+                          </SelectItem>
+                        ))}
                         <SelectItem value="no-preference">No Preference</SelectItem>
                       </SelectContent>
                     </Select>

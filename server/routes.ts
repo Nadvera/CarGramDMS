@@ -119,6 +119,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Sales agents endpoint
+  app.get("/api/sales-agents", async (req, res) => {
+    try {
+      const agents = await storage.getSalesAgents();
+      res.json({ agents });
+    } catch (error) {
+      console.error("Error fetching sales agents:", error);
+      res.status(500).json({ 
+        message: "Failed to fetch sales agents",
+        error: error.message 
+      });
+    }
+  });
+
   // Data Assessment API endpoint
   app.get("/api/data-assessment", async (req, res) => {
     try {

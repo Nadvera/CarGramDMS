@@ -115,6 +115,43 @@ export const storage = {
     };
   },
 
+  // Sales agent methods
+  async getSalesAgents() {
+    const { data, error } = await supabase
+      .from('sales_agents')
+      .select('*')
+      .eq('is_active', 'true')
+      .order('first_name', { ascending: true });
+
+    if (error) throw error;
+    return data || [];
+  },
+
+  async getSalesAgentById(id: string) {
+    const { data, error } = await supabase
+      .from('sales_agents')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error && error.code !== 'PGRST116') {
+      throw error;
+    }
+
+    return data;
+  },
+
+  async createSalesAgent(agentData: any) {
+    const { data, error } = await supabase
+      .from('sales_agents')
+      .insert([agentData])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
   // Update method names to match interface
   async createEmailSubscription(subscription: InsertEmailSubscription) {
     return this.addEmailSubscription(subscription);
@@ -138,12 +175,19 @@ export const storage = {
         monthly_inventory: data.monthlyInventory,
         current_software: data.currentSoftware,
         interested_features: data.interestedFeatures,
-        sales_agent: data.salesAgent,
+        sales_agent_id: data.salesAgentId,
         signup_at: new Date().toISOString(),
         status: 'pending'
       })
       .select()
       .single();
+
+    if (error) {
+      console.error("Database error during dealer signup:", error);
+      throw new Error(`Failed to create dealer signup: ${error.message}`);
+    }
+
+    return result;
   },
 
   async performDataAssessment(): Promise<any> {
