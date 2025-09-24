@@ -44,6 +44,7 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
       monthlyInventory: "",
       currentSoftware: "",
       interestedFeatures: [],
+      salesAgent: "",
     },
   });
 
@@ -344,6 +345,33 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage className={theme === 'dark' ? 'text-red-400' : ''} />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="salesAgent"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className={theme === 'dark' ? 'text-gray-300' : ''}>
+                      Preferred Sales Agent (Optional)
+                    </FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className={theme === 'dark' ? 'bg-gray-700 border-gray-600 text-white' : ''}>
+                          <SelectValue placeholder="Select a sales agent" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="select-content">
+                        <SelectItem value="alex-rodriguez">Alex Rodriguez</SelectItem>
+                        <SelectItem value="sarah-johnson">Sarah Johnson</SelectItem>
+                        <SelectItem value="mike-chen">Mike Chen</SelectItem>
+                        <SelectItem value="jessica-williams">Jessica Williams</SelectItem>
+                        <SelectItem value="david-thompson">David Thompson</SelectItem>
+                        <SelectItem value="no-preference">No Preference</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage className={theme === 'dark' ? 'text-red-400' : ''} />
                   </FormItem>
                 )}

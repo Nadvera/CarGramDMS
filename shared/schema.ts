@@ -30,6 +30,7 @@ export const dealerSignups = pgTable("dealer_signups", {
   monthlyInventory: text("monthly_inventory").notNull(),
   currentSoftware: text("current_software"),
   interestedFeatures: text("interested_features").array(),
+  salesAgent: text("sales_agent"),
   signupAt: timestamp("signup_at").defaultNow().notNull(),
   status: varchar("status").default("pending").notNull(),
   notes: text("notes"),
@@ -59,6 +60,7 @@ export const insertDealerSignupSchema = createInsertSchema(dealerSignups).pick({
   monthlyInventory: true,
   currentSoftware: true,
   interestedFeatures: true,
+  salesAgent: true,
 }).extend({
   dealershipName: z.string().min(1, "Dealership name is required"),
   contactName: z.string().min(1, "Contact name is required"),
@@ -72,6 +74,7 @@ export const insertDealerSignupSchema = createInsertSchema(dealerSignups).pick({
   monthlyInventory: z.string().min(1, "Monthly inventory is required"),
   currentSoftware: z.string().optional(),
   interestedFeatures: z.array(z.string()).default([]),
+  salesAgent: z.string().optional(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

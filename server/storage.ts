@@ -59,13 +59,19 @@ export const storage = {
     return data;
   },
 
-  async getDealerSignups() {
+  async getDealerSignups(): Promise<DealerSignup[]> {
+    console.log("Fetching all dealer signups...");
+
     const { data, error } = await supabase
       .from('dealer_signups')
       .select('*')
       .order('signup_at', { ascending: false });
 
-    if (error) throw error;
+    if (error) {
+      console.error("Error fetching dealer signups:", error);
+      throw new Error(`Failed to fetch dealer signups: ${error.message}`);
+    }
+
     return data || [];
   },
 
@@ -114,7 +120,128 @@ export const storage = {
     return this.addEmailSubscription(subscription);
   },
 
-  async createDealerSignup(signup: InsertDealerSignup) {
-    return this.addDealerSignup(signup);
+  async createDealerSignup(data: InsertDealerSignup): Promise<DealerSignup> {
+    console.log("Creating dealer signup with data:", data);
+
+    const { data: result, error } = await supabase
+      .from('dealer_signups')
+      .insert({
+        dealership_name: data.dealershipName,
+        contact_name: data.contactName,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        zip_code: data.zipCode,
+        dealer_license: data.dealerLicense,
+        monthly_inventory: data.monthlyInventory,
+        current_software: data.currentSoftware,
+        interested_features: data.interestedFeatures,
+        sales_agent: data.salesAgent,
+        signup_at: new Date().toISOString(),
+        status: 'pending'
+      })
+      .select()
+      .single();
+  },
+
+  async performDataAssessment(): Promise<any> {
+    console.log("Performing comprehensive data assessment...");
+
+    try {
+      // Get table information
+      const { data: tables, error: tablesError } = await supabase
+        .from('information_schema.tables')
+        .select('table_name, table_type')
+        .eq('table_schema', 'public');
+
+      if (tablesError) {
+        console.log("Could not fetch table info, proceeding with basic assessment...");
+      }
+
+      // Assess each table we know about
+      const assessments = {};
+
+      // Email subscriptions assessment
+      const { data: emailData, error: emailError } = await supabase
+        .from('email_subscriptions')
+        .select('*', { count: 'exact', head: true });
+
+      const { data: emailSample } = await supabase
+        .from('email_subscriptions')
+        .select('*')
+        .limit(5);
+
+      assessments['email_subscriptions'] = {
+        total_records: emailData?.length || 0,
+        fields: emailSample && emailSample.length > 0 ? Object.keys(emailSample[0]) : [],
+        sample_data: emailSample?.slice(0, 2) || [],
+        table_exists: !emailError
+      };
+
+      // Dealer signups assessment
+      const { data: dealerData, error: dealerError } = await supabase
+        .from('dealer_signups')
+        .select('*', { count: 'exact', head: true });
+
+      const { data: dealerSample } = await supabase
+        .from('dealer_signups')
+        .select('*')
+        .limit(5);
+
+      // Analyze dealer signup field completeness
+      const fieldAnalysis = {};
+      if (dealerSample && dealerSample.length > 0) {
+        const fields = Object.keys(dealerSample[0]);
+        fields.forEach(field => {
+          const nonNullCount = dealerSample.filter(record => record[field] !== null && record[field] !== '').length;
+          fieldAnalysis[field] = {
+            completion_rate: `${Math.round((nonNullCount / dealerSample.length) * 100)}%`,
+            sample_values: dealerSample.map(record => record[field]).filter(val => val !== null && val !== '').slice(0, 3)
+          };
+        });
+      }
+
+      assessments['dealer_signups'] = {
+        total_records: dealerData?.length || 0,
+        fields: dealerSample && dealerSample.length > 0 ? Object.keys(dealerSample[0]) : [],
+        field_analysis: fieldAnalysis,
+        sample_data: dealerSample?.slice(0, 2) || [],
+        table_exists: !dealerError,
+        sales_agent_field_exists: dealerSample && dealerSample.length > 0 && dealerSample[0].hasOwnProperty('sales_agent')
+      };
+
+      // Users assessment
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('*', { count: 'exact', head: true });
+
+      assessments['users'] = {
+        total_records: userData?.length || 0,
+        table_exists: !userError
+      };
+
+      return {
+        database_connected: true,
+        tables_assessed: Object.keys(assessments),
+        assessments,
+        recommendations: [
+          dealerSample && dealerSample.length > 0 && !dealerSample[0].hasOwnProperty('sales_agent')
+            ? "Add sales_agent column to dealer_signups table"
+            : "Sales agent field is properly configured",
+          assessments['dealer_signups']?.total_records === 0
+            ? "No dealer signups found - consider adding test data"
+            : `Found ${assessments['dealer_signups']?.total_records} dealer signups`,
+          assessments['email_subscriptions']?.total_records === 0
+            ? "No email subscriptions found"
+            : `Found ${assessments['email_subscriptions']?.total_records} email subscriptions`
+        ]
+      };
+
+    } catch (error) {
+      console.error("Data assessment error:", error);
+      throw new Error(`Data assessment failed: ${error.message}`);
+    }
   }
 };

@@ -119,6 +119,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Data Assessment API endpoint
+  app.get("/api/data-assessment", async (req, res) => {
+    try {
+      const assessment = await storage.performDataAssessment();
+      res.json({
+        message: "Database assessment completed successfully",
+        assessment,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error("Error performing data assessment:", error);
+      res.status(500).json({ 
+        message: "Failed to perform data assessment",
+        error: error.message 
+      });
+    }
+  });
+
 
   const httpServer = createServer(app);
   return httpServer;
