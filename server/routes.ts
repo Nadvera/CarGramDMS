@@ -4,12 +4,7 @@ import { storage } from "./storage";
 import { insertEmailSubscriptionSchema, insertDealerSignupSchema } from "@shared/schema";
 import { z } from "zod";
 import { sendDealerSignupNotification, sendDealerWelcomeEmail } from "./email";
-import { Pool } from "pg";
 
-// Initialize PostgreSQL connection pool
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || "postgresql://user:password@host:port/database",
-});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Email subscription endpoint
@@ -116,13 +111,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get all dealer signups (for testing)
   app.get("/api/dealer-signups", async (req, res) => {
     try {
-      const client = await pool.connect();
-      try {
-        const result = await client.query('SELECT * FROM dealer_signups ORDER BY signup_at DESC');
-        res.json({ signups: result.rows, count: result.rows.length });
-      } finally {
-        client.release();
-      }
+      const signups = await storage.getDealerSignups();
+      res.json({ signups, count: signups.length });
     } catch (error) {
       console.error("Error fetching dealer signups:", error);
       res.status(500).json({ message: "Failed to fetch signups" });

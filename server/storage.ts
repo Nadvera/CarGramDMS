@@ -93,5 +93,28 @@ export const storage = {
 
     if (error) throw error;
     return data;
+  },
+
+  // Add subscription stats method
+  async getSubscriptionStats() {
+    const { count, error } = await supabase
+      .from('email_subscriptions')
+      .select('*', { count: 'exact', head: true });
+
+    if (error) throw error;
+
+    return {
+      totalSubscriptions: count || 0,
+      activeSubscriptions: count || 0 // Since we don't have inactive subscriptions in our schema
+    };
+  },
+
+  // Update method names to match interface
+  async createEmailSubscription(subscription: InsertEmailSubscription) {
+    return this.addEmailSubscription(subscription);
+  },
+
+  async createDealerSignup(signup: InsertDealerSignup) {
+    return this.addDealerSignup(signup);
   }
 };
