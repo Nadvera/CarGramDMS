@@ -11,148 +11,87 @@ export interface IStorage {
   createDealerSignup(signup: InsertDealerSignup): Promise<any>;
 }
 
-import { pool, initializeDatabase } from "./db";
+import { supabase } from "./db";
+import type { InsertEmailSubscription, InsertDealerSignup } from "@shared/schema";
 
-export class DatabaseStorage implements IStorage {
-  constructor() {
-    // Initialize database on startup
-    initializeDatabase().catch(console.error);
-  }
+export const storage = {
+  // Email subscription methods
+  async addEmailSubscription(subscription: InsertEmailSubscription) {
+    const { data, error } = await supabase
+      .from('email_subscriptions')
+      .insert([subscription])
+      .select()
+      .single();
 
-  async getUser(id: string): Promise<User | undefined> {
-    const client = await pool.connect();
-    try {
-      const result = await client.query("SELECT * FROM users WHERE id = $1", [id]);
-      return result.rows[0] || undefined;
-    } finally {
-      client.release();
-    }
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const client = await pool.connect();
-    try {
-      const result = await client.query("SELECT * FROM users WHERE username = $1", [username]);
-      return result.rows[0] || undefined;
-    } finally {
-      client.release();
-    }
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const client = await pool.connect();
-    try {
-      const query = `
-        INSERT INTO users (id, username, passwordHash, email, name)
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING id, username, email, name
-      `;
-      const values = [
-        randomUUID(),
-        insertUser.username,
-        insertUser.passwordHash,
-        insertUser.email,
-        insertUser.name,
-      ];
-      const result = await client.query(query, values);
-      return result.rows[0];
-    } finally {
-      client.release();
-    }
-  }
-
-  async getEmailSubscriptionByEmail(email: string): Promise<EmailSubscription | undefined> {
-    const client = await pool.connect();
-    try {
-      const result = await client.query("SELECT * FROM email_subscriptions WHERE email = $1", [email]);
-      return result.rows[0] || undefined;
-    } finally {
-      client.release();
-    }
-  }
-
-  async createEmailSubscription(insertSubscription: InsertEmailSubscription): Promise<EmailSubscription> {
-    const client = await pool.connect();
-    try {
-      const query = `
-        INSERT INTO email_subscriptions (email, isActive)
-        VALUES ($1, $2)
-        RETURNING id, email, isActive, signup_at
-      `;
-      const values = [insertSubscription.email, insertSubscription.isActive];
-      const result = await client.query(query, values);
-      return result.rows[0];
-    } finally {
-      client.release();
-    }
-  }
-
-  async getSubscriptionStats(): Promise<{ totalSubscriptions: number; activeSubscriptions: number }> {
-    const client = await pool.connect();
-    try {
-      const allSubscriptionsResult = await client.query("SELECT * FROM email_subscriptions");
-      const activeSubscriptionsResult = await client.query("SELECT * FROM email_subscriptions WHERE isActive = $1", [true]);
-
-      return {
-        totalSubscriptions: allSubscriptionsResult.rowCount,
-        activeSubscriptions: activeSubscriptionsResult.rowCount,
-      };
-    } finally {
-      client.release();
-    }
-  }
-
-  async createDealerSignup(insertSignup: InsertDealerSignup): Promise<any> {
-    let client;
-    try {
-      console.log("Attempting to connect to database...");
-      client = await pool.connect();
-      console.log("Database connection successful");
-      
-      const query = `
-        INSERT INTO dealer_signups (
-          dealership_name, contact_name, email, phone, address,
-          city, state, zip_code, dealer_license, monthly_inventory,
-          current_software, interested_features
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-        RETURNING id, dealership_name, contact_name, email, signup_at
-      `;
-
-      const values = [
-        insertSignup.dealershipName,
-        insertSignup.contactName,
-        insertSignup.email,
-        insertSignup.phone,
-        insertSignup.address,
-        insertSignup.city,
-        insertSignup.state,
-        insertSignup.zipCode,
-        insertSignup.dealerLicense || null,
-        insertSignup.monthlyInventory,
-        insertSignup.currentSoftware || null,
-        insertSignup.interestedFeatures || []
-      ];
-
-      console.log("Executing database query...");
-      const result = await client.query(query, values);
-      console.log("Query successful, returning result");
-      return result.rows[0];
-    } catch (error) {
-      console.error("Database operation failed:", error);
-      // For now, return a mock response to unblock the form
-      return {
-        id: Math.floor(Math.random() * 10000),
-        dealership_name: insertSignup.dealershipName,
-        contact_name: insertSignup.contactName,
-        email: insertSignup.email,
-        signup_at: new Date().toISOString()
-      };
-    } finally {
-      if (client) {
-        client.release();
+    if (error) {
+      if (error.code === '23505') { // Unique constraint violation
+        throw new Error('409: Email already subscribed');
       }
+      throw error;
     }
-  }
-}
 
-export const storage = new DatabaseStorage();
+    return data;
+  },
+
+  async getEmailSubscriptionByEmail(email: string) {
+    const { data, error } = await supabase
+      .from('email_subscriptions')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (error && error.code !== 'PGRST116') { // Not found error is OK
+      throw error;
+    }
+
+    return data;
+  },
+
+  // Dealer signup methods
+  async addDealerSignup(signup: InsertDealerSignup) {
+    const { data, error } = await supabase
+      .from('dealer_signups')
+      .insert([signup])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async getDealerSignups() {
+    const { data, error } = await supabase
+      .from('dealer_signups')
+      .select('*')
+      .order('signup_at', { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  },
+
+  // User methods (for future use)
+  async getUserByUsername(username: string) {
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('username', username)
+      .single();
+
+    if (error && error.code !== 'PGRST116') {
+      throw error;
+    }
+
+    return data;
+  },
+
+  async createUser(userData: any) {
+    const { data, error } = await supabase
+      .from('users')
+      .insert([userData])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+};
