@@ -379,9 +379,12 @@ export default function Landing() {
       <section id="features" className={`py-16 ${theme === 'dark' ? 'bg-gray-900' : ''}`} data-testid="features-section">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className={`font-queen text-4xl lg:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>
-              Cargram DMS - Built Different
+            <h2 className={`text-4xl lg:text-5xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>
+              <span className="font-instagram">Cargram</span> DMS
             </h2>
+            <h3 className={`font-queen text-2xl lg:text-3xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>
+              Built Different
+            </h3>
             <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-muted-foreground'} max-w-3xl mx-auto`}>
               The mobile-first DMS that closes deals on the lot, not just in the office.
               Years of automotive software expertise, serving dealers nationwide.
