@@ -111,47 +111,89 @@ export function LoginModal({ theme }: LoginModalProps) {
             </div>
           </a>
 
-          {/* Cargram DMS Option */}
-          <a
-            href="#dealer-signup"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById("dealer-signup")?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
-            className={`
-              group block w-full p-6 
-              bg-gradient-to-r from-orange-600/20 to-red-600/20
-              border border-orange-500/30
-              rounded-3xl
-              hover:border-orange-400/50
-              hover:shadow-[0_0_30px_rgba(251,146,60,0.3)]
-              transition-all duration-300
-              hover:scale-[1.02]
-              active:scale-[0.98]
-              ${theme === 'dark' ? 'hover:bg-gradient-to-r hover:from-orange-600/30 hover:to-red-600/30' : 'bg-gradient-to-r from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100'}
-            `}
-            data-testid="dms-login-option"
-          >
-            <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <Building className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className={`font-bold text-lg mb-1 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                  Cargram DMS
-                </h3>
-                <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Professional dealer management system. Mobile-first, lightning fast, built for moving metal.
-                </p>
-                <div className="flex items-center mt-3 text-orange-400 group-hover:text-orange-300 transition-colors">
-                  <span className="text-sm font-medium">Get Demo Access</span>
-                  <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
+          {/* Cargram DMS Section */}
+          <div className="space-y-4">
+            <div className="text-center">
+              <h3 className={`font-bold text-lg mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                Cargram DMS
+              </h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Professional dealer management system
+              </p>
             </div>
-          </a>
+            
+            <div className="grid grid-cols-2 gap-3">
+              {/* Login Button - Green */}
+              <a
+                href="https://dms.cargram.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`
+                  group block w-full p-4 
+                  bg-gradient-to-r from-green-600/20 to-emerald-600/20
+                  border border-green-500/30
+                  rounded-2xl
+                  hover:border-green-400/50
+                  hover:shadow-[0_0_25px_rgba(34,197,94,0.3)]
+                  transition-all duration-300
+                  hover:scale-[1.02]
+                  active:scale-[0.98]
+                  text-center
+                  ${theme === 'dark' ? 'hover:bg-gradient-to-r hover:from-green-600/30 hover:to-emerald-600/30' : 'bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100'}
+                `}
+                data-testid="dms-login-button"
+              >
+                <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-2">
+                  <Building className="w-5 h-5 text-white" />
+                </div>
+                <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                  Login
+                </div>
+                <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
+                  Existing customers
+                </div>
+              </a>
+
+              {/* Sign Up Button - Blue */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("dealer-signup")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                  // Close the modal
+                  const closeButton = document.querySelector('[data-radix-collection-item] button');
+                  if (closeButton) {
+                    (closeButton as HTMLButtonElement).click();
+                  }
+                }}
+                className={`
+                  group block w-full p-4 
+                  bg-gradient-to-r from-blue-600/20 to-indigo-600/20
+                  border border-blue-500/30
+                  rounded-2xl
+                  hover:border-blue-400/50
+                  hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]
+                  transition-all duration-300
+                  hover:scale-[1.02]
+                  active:scale-[0.98]
+                  text-center
+                  ${theme === 'dark' ? 'hover:bg-gradient-to-r hover:from-blue-600/30 hover:to-indigo-600/30' : 'bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100'}
+                `}
+                data-testid="dms-signup-button"
+              >
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-2">
+                  <Building className="w-5 h-5 text-white" />
+                </div>
+                <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                  Sign Up
+                </div>
+                <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
+                  Get demo access
+                </div>
+              </button>
+            </div>
+          </div>
 
           {/* Existing Customer Note */}
           <div className={`text-center pt-4 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
