@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { insertEmailSubscriptionSchema, type InsertEmailSubscription } from "@shared/schema";
 import DealerSignupForm from "@/components/dealer-signup-form";
+import { LoginModal } from "@/components/login-modal";
 import {
   Zap,
   Users,
@@ -200,17 +201,7 @@ export default function Landing() {
               </Button>
 
               {/* Login Button */}
-              <Button
-                asChild
-                variant="automotive"
-                size="default"
-                className="capsule-btn"
-                data-testid="login-button"
-              >
-                <a href="https://cargram.app" target="_blank" rel="noopener noreferrer">
-                  Login
-                </a>
-              </Button>
+              <LoginModal theme={theme} />
             </div>
           </div>
         </div>
