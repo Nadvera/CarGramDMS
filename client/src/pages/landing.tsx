@@ -103,6 +103,12 @@ export default function Landing() {
     });
   };
 
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   // Iframe watchdog timer to handle cases where neither onLoad nor onError fires
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -153,27 +159,27 @@ export default function Landing() {
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <a
-                href="#features"
-                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
+              <button
+                onClick={() => scrollToSection('features')}
+                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors cursor-pointer`}
                 data-testid="nav-features"
               >
                 Features
-              </a>
-              <a
-                href="#community"
-                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
+              </button>
+              <button
+                onClick={() => scrollToSection('community')}
+                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors cursor-pointer`}
                 data-testid="nav-community"
               >
                 Community
-              </a>
-              <a
-                href="#support"
-                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
+              </button>
+              <button
+                onClick={() => scrollToSection('support')}
+                className={` ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'} transition-colors cursor-pointer`}
                 data-testid="nav-support"
               >
                 Support
-              </a>
+              </button>
             </nav>
 
             {/* Action Buttons */}
@@ -260,13 +266,16 @@ export default function Landing() {
               {/* Hero Actions */}
               <div className="flex flex-col sm:flex-row gap-4" data-testid="hero-actions">
                 <Button
+                  asChild
                   variant="orange"
                   size="xl"
                   className="capsule-btn"
                   data-testid="demo-dms-button"
                 >
-                  <Zap className="w-5 h-5" />
-                  Demo Cargram DMS
+                  <a href="#dealer-signup">
+                    <Zap className="w-5 h-5" />
+                    Demo Cargram DMS
+                  </a>
                 </Button>
                 <Button
                   onClick={scrollToForm}
@@ -567,7 +576,7 @@ export default function Landing() {
       </section>
 
       {/* Dealer Signup Section */}
-      <section className={`py-16 ${theme === 'dark' ? 'bg-gray-800' : 'bg-secondary/30'}`} data-testid="dealer-signup-section">
+      <section id="dealer-signup" className={`py-16 ${theme === 'dark' ? 'bg-gray-800' : 'bg-secondary/30'}`} data-testid="dealer-signup-section">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className={`font-queen text-4xl lg:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>
@@ -667,22 +676,28 @@ export default function Landing() {
               {/* Contact CTA */}
               <div className="flex flex-col sm:flex-row gap-4" data-testid="contact-cta">
                 <Button
+                  asChild
                   variant="automotive"
                   size="xl"
                   className="capsule-btn"
                   data-testid="contact-sales-button"
                 >
-                  <Phone className="w-5 h-5" />
-                  Get Cargram Demo
+                  <a href="#dealer-signup">
+                    <Phone className="w-5 h-5" />
+                    Get Cargram Demo
+                  </a>
                 </Button>
                 <Button
+                  asChild
                   variant="secondary"
                   size="xl"
                   className={`capsule-btn ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'text-gray-900'}`}
                   data-testid="learn-more-button"
                 >
-                  <Info className="w-5 h-5" />
-                  Success Stories
+                  <a href="#support">
+                    <Info className="w-5 h-5" />
+                    Success Stories
+                  </a>
                 </Button>
               </div>
             </div>
@@ -785,10 +800,26 @@ export default function Landing() {
                   {section.links.map((link, linkIndex) => (
                     <a
                       key={linkIndex}
-                      href={link === "Privacy Policy" ? "https://cargram.app/privacy" : "#"}
+                      href={
+                        link === "Privacy Policy" 
+                          ? "https://cargram.app/privacy" 
+                          : link === "Contact"
+                          ? "#support"
+                          : link === "Careers"
+                          ? "#dealer-signup"
+                          : link === "Terms of Service"
+                          ? "https://cargram.app/terms"
+                          : "#"
+                      }
                       className={`block transition-colors ${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}
                       data-testid={`footer-link-${link.toLowerCase().replace(' ', '-')}`}
-                      {...(link === "Privacy Policy" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      {...((link === "Privacy Policy" || link === "Terms of Service") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      {...(link === "Contact" || link === "Careers" ? { 
+                        onClick: (e: React.MouseEvent) => {
+                          e.preventDefault();
+                          scrollToSection(link === "Contact" ? "support" : "dealer-signup");
+                        }
+                      } : {})}
                     >
                       {link}
                     </a>
