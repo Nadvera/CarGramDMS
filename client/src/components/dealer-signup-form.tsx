@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -87,7 +86,7 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
 
   const featureOptions = [
     "KBB & MMR Appraisals",
-    "Carfax & AutoCheck Integration", 
+    "Carfax & AutoCheck Integration",
     "E-Signature",
     "Mobile Interface",
     "Social Media Integration",
@@ -375,7 +374,7 @@ export default function DealerSignupForm({ theme }: DealerSignupFormProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="select-content">
-                        {salesAgents.map((agent: any) => (
+                        {salesAgents.map((agent) => (
                           <SelectItem key={agent.id} value={agent.id}>
                             {agent.first_name} {agent.last_name}
                           </SelectItem>

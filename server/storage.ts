@@ -164,20 +164,13 @@ export const storage = {
       .from('dealer_signups')
       .insert({
         dealership_name: data.dealershipName,
-        contact_name: data.contactName,
+        contact_person: data.contactPerson,
         email: data.email,
         phone: data.phone,
-        address: data.address,
-        city: data.city,
-        state: data.state,
-        zip_code: data.zipCode,
-        dealer_license: data.dealerLicense,
-        monthly_inventory: data.monthlyInventory,
-        current_software: data.currentSoftware,
-        interested_features: data.interestedFeatures,
+        location: data.location,
+        message: data.message,
         sales_agent_id: data.salesAgentId,
-        signup_at: new Date().toISOString(),
-        status: 'pending'
+        signup_at: new Date().toISOString()
       })
       .select()
       .single();
