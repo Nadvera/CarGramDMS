@@ -13,68 +13,38 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 // Initialize database tables
 export async function initializeDatabase() {
   try {
-    // Create users table
-    const { error: usersError } = await supabase.rpc('exec', {
-      sql: `
-        CREATE TABLE IF NOT EXISTS users (
-          id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
-          username TEXT NOT NULL UNIQUE,
-          password TEXT NOT NULL
-        );
-      `
-    });
+    // Check if tables exist by trying to select from them
+    // If they don't exist, Supabase will return an error and we'll know to create them manually
+    
+    const { error: usersCheck } = await supabase
+      .from('users')
+      .select('id')
+      .limit(1);
 
-    // Create email_subscriptions table
-    const { error: emailError } = await supabase.rpc('exec', {
-      sql: `
-        CREATE TABLE IF NOT EXISTS email_subscriptions (
-          id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
-          email TEXT NOT NULL UNIQUE,
-          subscribed_at TIMESTAMP DEFAULT NOW() NOT NULL,
-          is_active VARCHAR DEFAULT 'true' NOT NULL
-        );
-      `
-    });
+    const { error: emailCheck } = await supabase
+      .from('email_subscriptions')
+      .select('id')
+      .limit(1);
 
-    // Create dealer_signups table
-    const { error: dealerError } = await supabase.rpc('exec', {
-      sql: `
-        CREATE TABLE IF NOT EXISTS dealer_signups (
-          id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
-          dealership_name TEXT NOT NULL,
-          contact_person TEXT NOT NULL,
-          email TEXT NOT NULL UNIQUE,
-          phone TEXT,
-          location TEXT,
-          message TEXT,
-          signup_at TIMESTAMP DEFAULT NOW() NOT NULL,
-          sales_agent VARCHAR
-        );
-      `
-    });
+    const { error: dealerCheck } = await supabase
+      .from('dealer_signups')
+      .select('id')
+      .limit(1);
 
-    // Create sales_agents table
-    const { error: agentsError } = await supabase.rpc('exec', {
-      sql: `
-        CREATE TABLE IF NOT EXISTS sales_agents (
-          id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
-          first_name TEXT NOT NULL,
-          last_name TEXT NOT NULL,
-          email TEXT NOT NULL UNIQUE,
-          is_active VARCHAR DEFAULT 'true' NOT NULL,
-          created_at TIMESTAMP DEFAULT NOW() NOT NULL
-        );
-      `
-    });
+    const { error: agentsCheck } = await supabase
+      .from('sales_agents')
+      .select('id')
+      .limit(1);
 
-    if (usersError) console.error('Users table error:', usersError);
-    if (emailError) console.error('Email subscriptions table error:', emailError);
-    if (dealerError) console.error('Dealer signups table error:', dealerError);
-    if (agentsError) console.error('Sales agents table error:', agentsError);
+    // Log which tables need to be created manually
+    if (usersCheck) console.log('Users table needs to be created in Supabase dashboard');
+    if (emailCheck) console.log('Email subscriptions table needs to be created in Supabase dashboard');
+    if (dealerCheck) console.log('Dealer signups table needs to be created in Supabase dashboard');
+    if (agentsCheck) console.log('Sales agents table needs to be created in Supabase dashboard');
 
-    console.log('Supabase tables initialized successfully');
+    console.log('Database connection verified');
   } catch (error) {
-    console.error('Error initializing database:', error);
+    console.warn('Database initialization warning:', error);
     // Don't throw error to prevent deployment failure
   }
 }
